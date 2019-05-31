@@ -2,20 +2,17 @@ package VF;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
+import Universal.UniversalFunctions;
 
-public class PointField implements Obstical {
-    public double strength, falloff;
-    public Pose location;
+public class PointField extends VectorFieldComponent {
     public PointField (Pose location, double strength, double falloff) {
-        this.strength = strength;
-        this.falloff = falloff;
-        this.location = location;
+        super(location, strength, falloff);
     }
 
     //given a destination, creates the vector induced by the field at position
-    public Vector2 interact(Pose position, Vector2 destination) {
+    public Vector2 interact(Pose position) {
         //zeroes the field at 0, 0, 0 and translates the position and destination to match
-        Vector2 dest = destination.clone();
+        Vector2 dest = getTarget().toVector().clone();
         dest.subtract(location.toVector());
         Vector2 point = new Vector2();
         point.x = position.x - location.x;
@@ -27,7 +24,7 @@ public class PointField implements Obstical {
         double strength = getStrength(output.magnitude());
 
         //if the obstical is in the way...
-        if(Math.abs(output.angle()) > Math.acos(output.magnitude() / dest.magnitude())){
+        if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.acos(output.magnitude() / dest.magnitude())){
 
             //refedines the vector as perpendicular to its original direction
             output.setFromPolar(strength, output.angle() + Math.PI / 2);
@@ -43,13 +40,8 @@ public class PointField implements Obstical {
             output.setFromPolar(strength, output.angle());
         }
 
-        //rotates the vector to its original angle
+        //rotates the vector back to its original angle
         output.rotate(dest.angle());
         return output;
-    }
-
-    //returns the magnitude of a vector whose origin is a distance d away from the field's origin
-    public double getStrength (double d) {
-        return strength / d * Math.pow(Math.E, falloff * (strength - d));
     }
 }
