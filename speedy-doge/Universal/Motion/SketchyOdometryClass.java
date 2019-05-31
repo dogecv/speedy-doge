@@ -5,16 +5,17 @@ import Universal.Math.Vector2;
 
 public class SketchyOdometryClass {
     public class Wheels3{
-        public double encPerInch;
+        public final double encPerInch;
 
         //the angles are the angles of the motors, not their wheels
         public Pose wheel1 = new Pose();
         public Pose wheel2 = new Pose();
         public Pose wheel3 = new Pose();
-        public Wheels3(Pose p1, Pose p2, Pose p3){
+        public Wheels3(Pose p1, Pose p2, Pose p3, double encPerInch){
             wheel1 = p1;
             wheel2 = p2;
             wheel3 = p3;
+            this.encPerInch = encPerInch;
         }
 
         public Pose standardPositionTrack(Pose currentPos, double x/*read3*/, double l/*read2*/, double r/*read1*/){
