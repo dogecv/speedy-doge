@@ -8,15 +8,15 @@ public class MotionProfile {
     State state = State.CONCAVE;
     Direction direction = Direction.INCREASING;
 
-    //Piece of the peicewise velocity curve
+    //Piece of the piecewise velocity curve
     public enum State {
         CONCAVE,
-        CONVEX;
+        CONVEX
     }
 
     public enum Direction {
         INCREASING,
-        DECREASING;
+        DECREASING
     }
 
     public MotionProfile(double maxJerk) {
@@ -31,7 +31,7 @@ public class MotionProfile {
         direction = Direction.INCREASING;
         if (startingVelocity > desiredVelocity)
             direction = Direction.DECREASING;
-        startTime = 0;
+        startTime = UniversalFunctions.getTimeInSeconds();
     }
 
     //obtains the profile's current velocity
