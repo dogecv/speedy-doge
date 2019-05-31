@@ -78,6 +78,10 @@ public class Vector2 {
         y = Math.sin(angle) * tempX + Math.cos(angle) * tempY;
     }
 
+    public Vector2 clone(){
+        return new Vector2(x, y);
+    }
+
     public String toString(){
         return "(" + x + ", " + y + ")";
     }
