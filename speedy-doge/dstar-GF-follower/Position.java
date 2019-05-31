@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
 public class Position {
-    public double x;
-    public double y;
-    public double theta;
+    private double x;
+    private double y;
+    private double theta;
 
     public Position(){
         this.x = 0;
