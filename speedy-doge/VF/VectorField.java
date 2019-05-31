@@ -16,7 +16,7 @@ public class VectorField {
         this.boundries = boundries;
         }
     public Vector2 getVector (Pose point, Vector2 destination) {
-        Vector2 output = new Vector2;
+        Vector2 output = new Vector2();
         for (Obstical obstical : obsticals) {
         output.add(obstical.interact(point, destination));
         }
