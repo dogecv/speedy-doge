@@ -33,6 +33,10 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
     private File wheelBaseSeparationFile = AppUtil.getInstance().getSettingsFile("wheelBaseSeparation.txt");
     private File horizontalTickOffsetFile = AppUtil.getInstance().getSettingsFile("horizontalTickOffset.txt");
 
+    private int verticalLeftEncoderPositionMultiplier = 1;
+    private int verticalRightEncoderPositionMultiplier = 1;
+    private int normalEncoderPositionMultiplier = 1;
+
     /**
      * Constructor for GlobalCoordinatePosition Thread
      * @param verticalEncoderLeft left odometry encoder, facing the vertical direction
@@ -56,8 +60,8 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
      */
     private void globalCoordinatePositionUpdate(){
         //Get Current Positions
-        verticalLeftEncoderWheelPosition = verticalEncoderLeft.getCurrentPosition();
-        verticalRightEncoderWheelPosition = verticalEncoderRight.getCurrentPosition();
+        verticalLeftEncoderWheelPosition = (verticalEncoderLeft.getCurrentPosition() * verticalLeftEncoderPositionMultiplier);
+        verticalRightEncoderWheelPosition = (verticalEncoderRight.getCurrentPosition() * verticalRightEncoderPositionMultiplier);
 
         double leftChange = verticalLeftEncoderWheelPosition - previousVerticalLeftEncoderWheelPosition;
         double rightChange = verticalRightEncoderWheelPosition - previousVerticalRightEncoderWheelPosition;
@@ -67,7 +71,7 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
         robotOrientationRadians = ((robotOrientationRadians + changeInRobotOrientation));
 
         //Get the components of the motion
-        normalEncoderWheelPosition = horizontalEncoder.getCurrentPosition() - (changeInRobotOrientation*horizontalEncoderTickPerDegreeOffset);
+        normalEncoderWheelPosition = (horizontalEncoder.getCurrentPosition() * normalEncoderPositionMultiplier) - (changeInRobotOrientation*horizontalEncoderTickPerDegreeOffset);
         double horizontalChange = normalEncoderWheelPosition - prevNormalEncoderWheelPosition;
 
         double p = ((rightChange + leftChange) / 2);
@@ -104,6 +108,30 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
      * Stops the position update thread
      */
     public void stop(){ isRunning = false; }
+
+    public void reverseLeftEncoder(){
+        if(verticalLeftEncoderPositionMultiplier == 1){
+            verticalLeftEncoderPositionMultiplier = -1;
+        }else{
+            verticalLeftEncoderPositionMultiplier = 1;
+        }
+    }
+
+    public void reverseRightEncoder(){
+        if(verticalRightEncoderPositionMultiplier == 1){
+            verticalRightEncoderPositionMultiplier = -1;
+        }else{
+            verticalRightEncoderPositionMultiplier = 1;
+        }
+    }
+
+    public void reverseNormalEncoder(){
+        if(normalEncoderPositionMultiplier == 1){
+            normalEncoderPositionMultiplier = -1;
+        }else{
+            normalEncoderPositionMultiplier = 1;
+        }
+    }
 
     /**
      * Runs the thread
