@@ -3,7 +3,7 @@ package VF;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 
-public abstract class VectorFieldComponent implements Placeholdername{
+public abstract class VectorFieldComponent implements ActivatableComponent {
     public double strength, falloff;
     public Pose location;
     private boolean isActive = true;

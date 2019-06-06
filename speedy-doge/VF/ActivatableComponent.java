@@ -1,7 +1,7 @@
 package VF;
 
 //TODO: get better name
-public interface Placeholdername {
+public interface ActivatableComponent {
 
     void activate();
     void deactivate();
