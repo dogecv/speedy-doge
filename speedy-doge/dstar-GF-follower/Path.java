@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode;
+package dstar-GF-follower;
+
+import Universal.Math.Pose;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +8,13 @@ import java.util.List;
 public class Path {
     ArrayList<Line> segments = new ArrayList<Line>();
 
-    public Path(List<Position> pos){
+    public Path(List<Pose> pos){
         for (int i = 1; i < pos.size(); i++){
             segments.add(new Line(pos.get(i - 1), pos.get(i)));
         }
     }
 
-    public double getPositionOnPath(Position current){
+    public double getPositionOnPath(Pose current){
         double min = Double.MAX_VALUE;
         Line l = segments.get(0);
         double distance = 0;
@@ -33,7 +35,7 @@ public class Path {
         return distance;
     }
 
-    public Position getLookaheadPoint(Position current, double r){
+    public Pose getLookaheadPoint(Pose current, double r){
         Line l = segments.get(0);
         double min = Double.MAX_VALUE;
         int index = 0;
@@ -47,21 +49,21 @@ public class Path {
             c++; //I've waited 4 freaking years for this moment
         }
 
-        Position center = l.closestPointTo(current);
-        ArrayList<Position> lookahead_points = new ArrayList<>();
+        Pose center = l.closestPointTo(current);
+        ArrayList<Pose> lookahead_points = new ArrayList<>();
         for (int i = index; i < segments.size(); i++){ //start at the current line segment to avoid going backwards
-            List<Position> potential = segments.get(i).getLookaheadPoints(current, r);
-            for (Position p : potential){
+            List<Pose> potential = segments.get(i).getLookaheadPoints(center, r);
+            for (Pose p : potential){
                 lookahead_points.add(p);
             }
         }
 
         double max_dist = Double.MIN_VALUE;
-        Position target = current;
+        Pose target = center;
         for (int j = 0; j < lookahead_points.size(); j++){
             if (lookahead_points.get(j).distanceTo(current) > max_dist){
                 if (getPositionOnPath(current) > getPositionOnPath(lookahead_points.get(j))) {
-                    max_dist = lookahead_points.get(j).distanceTo(current);
+                    max_dist = lookahead_points.get(j).distanceTo(center);
                     target = lookahead_points.get(j);
                 }
             }
