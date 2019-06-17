@@ -2,8 +2,8 @@ package Universal.Math.Geometry;
 
 import Universal.Math.Pose;
 
-public interface Shape {
+public abstract class Shape {
     Pose location = new Pose();
 
-    public void getClosestDistance(Pose pose);
+    public abstract double getClosestDistance(Pose pose);
 }
