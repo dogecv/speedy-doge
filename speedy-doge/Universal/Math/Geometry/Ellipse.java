@@ -1,4 +1,7 @@
-package Universal.Math;
+package Universal.Math.Geometry;
+
+import Universal.Math.Pose;
+import Universal.Math.Vector2;
 
 public class Ellipse {
     public double r1, r2;

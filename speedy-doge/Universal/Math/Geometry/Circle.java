@@ -1,4 +1,6 @@
-package Universal.Math;
+package Universal.Math.Geometry;
+
+import Universal.Math.Pose;
 
 public class Circle extends Ellipse {
 
