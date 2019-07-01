@@ -28,8 +28,8 @@ class MPC_Handler(i_pathfinder : MPC_Pathfinder) : Runnable{
         return pathfinder.getOptimalControlAction()
     }
 
-    fun getConfidence() : Double{
-        return pathfinder.getConfidence()
+    fun getConfidence(pos : Pose) : Double{
+        return pathfinder.getConfidence(pos)
     }
 
     fun addObstacle(obs : Pose){
