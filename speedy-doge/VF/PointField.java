@@ -4,12 +4,14 @@ import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalFunctions;
 
+/**
+ * VectorFieldComponent that when interacted with, directs position away from location and towards target
+ */
 public class PointField extends VectorFieldComponent {
     public PointField (Pose location, double strength, double falloff) {
         super(location, strength, falloff);
     }
 
-    //given a destination, creates the vector induced by the field at position
     public Vector2 interact(Pose position) {
         //zeroes the field at 0, 0, 0 and translates the position and destination to match
         Vector2 dest = getTarget().toVector().clone();

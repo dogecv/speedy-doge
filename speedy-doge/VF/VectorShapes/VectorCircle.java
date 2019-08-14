@@ -3,6 +3,9 @@ package VF.VectorShapes;
 import Universal.Math.Geometry.Circle;
 import Universal.Math.Pose;
 
+/**
+ * VectorShape in the form of a circle
+ */
 public class VectorCircle extends VectorShape{
 
     public VectorCircle(){

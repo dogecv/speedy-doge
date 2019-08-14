@@ -5,7 +5,7 @@ import VF.Objects.Crater;
 import VF.Objects.FieldWall;
 import VF.Objects.Lander;
 import VF.Objects.SilverSample;
-import VF.Obstical;
+import VF.Boundry;
 import VF.VectorField;
 import VF.VectorFieldComponent;
 
@@ -63,7 +63,7 @@ public class UniversalConstants {
         obsticals.add(rightSampleq3);
         obsticals.add(rightSampleq4);
 
-        ArrayList<Obstical> boundries = new ArrayList<>();
+        ArrayList<Boundry> boundries = new ArrayList<>();
 
         boundries.add(wall);
 

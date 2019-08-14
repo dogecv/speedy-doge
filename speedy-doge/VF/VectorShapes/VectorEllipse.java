@@ -3,7 +3,9 @@ package VF.VectorShapes;
 import Universal.Math.Geometry.Ellipse;
 import Universal.Math.Geometry.Rectangle;
 import Universal.Math.Pose;
-
+/**
+ * VectorShape in the form of an Ellipse
+ */
 public class VectorEllipse extends VectorShape{
 
     public VectorEllipse(){
