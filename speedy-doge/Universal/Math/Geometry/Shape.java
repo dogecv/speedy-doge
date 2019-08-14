@@ -1,9 +1,10 @@
 package Universal.Math.Geometry;
 
 import Universal.Math.Pose;
+import Universal.Math.Vector2;
 
 public abstract class Shape {
-    Pose location = new Pose();
+    Pose position = new Pose();
 
-    public abstract double getClosestDistance(Pose pose);
+    public abstract Vector2 getClosestPoint(Vector2 point);
 }

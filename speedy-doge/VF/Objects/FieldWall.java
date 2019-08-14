@@ -1,8 +1,9 @@
-package VF;
+package VF.Objects;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalConstants;
+import VF.Obstical;
 
 public class FieldWall implements Obstical {
     private boolean isActive;
