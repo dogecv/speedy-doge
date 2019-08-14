@@ -1,5 +1,7 @@
 package VF;
 
+import FRC_Pure_Pursuit.Tank.Path;
+import FRC_Pure_Pursuit.Tank.Vector;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 
@@ -32,5 +34,19 @@ public class VectorField {
             obsticals.get(i).setTarget(location);
         }
         destination.location = location;
+    }
+
+    public Path generatePath(Pose pose, double stepSize, double thresholdForDestination) {
+        Vector2 temp = new Vector2(destination.location.x, destination.location.y);
+        temp.subtract(pose.toVector());
+        Path output = new Path();
+
+        while(temp.magnitude() < thresholdForDestination) {
+            temp.add(getVector(pose));
+            pose.x = temp.x;
+            pose.y = temp.y;
+            output.wayPoint(temp.x, temp.y);
+        }
+        return output;
     }
 }
