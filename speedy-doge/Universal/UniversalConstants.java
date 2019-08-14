@@ -2,10 +2,7 @@ package Universal;
 
 import Universal.Math.Geometry.Rectangle;
 import Universal.Math.Pose;
-import VF.Objects.Crater;
-import VF.Objects.FieldWall;
-import VF.Objects.Lander;
-import VF.Objects.SilverSample;
+import VF.Objects.*;
 import VF.Boundry;
 import VF.VectorField;
 import VF.VectorFieldComponent;
@@ -18,7 +15,7 @@ public class UniversalConstants {
     public static final double EFFECTIVE_ROBOT_RADIUS = 9 * Math.sqrt(2) + 2;
 
     //TODO: make a more modular version of this so that new shapes can be added to the rectangle for shortest distance calculations
-    public static Rectangle robot = new Rectangle(new Pose(), 18, 18);
+    public static Robot robot = new Robot();
 
 
 
