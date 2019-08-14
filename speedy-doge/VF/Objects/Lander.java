@@ -8,11 +8,11 @@ import VF.VectorShapes.VectorRectangle;
 
 public class Lander extends VectorFieldComponent {
     public final VectorRectangle landerBody, landerLeg1, landerLeg2;
-    public Lander(double strength, double falloff){
-        super(new Pose(0, 0, 0), strength, falloff);
-        landerBody = new VectorRectangle(new Pose(0, 0, Math.PI / 4), 23.3, 23.3, strength, falloff);
-        landerLeg1 = new VectorRectangle(new Pose(0, 0, Math.PI / 4), 44.8, 0, strength, falloff);
-        landerLeg2 = new VectorRectangle(new Pose(0, 0, Math.PI / 4), 44.8, 0, strength, falloff);
+    public Lander(Pose location, double strength, double falloff){
+        super(location, strength, falloff);
+        landerBody = new VectorRectangle(location, 23.3, 23.3, strength, falloff);
+        landerLeg1 = new VectorRectangle(location, 44.8, 0, strength, falloff);
+        landerLeg2 = new VectorRectangle(new Pose(location.x, location.y, location.angle - Math.PI / 2), 44.8, 0, strength, falloff);
     }
 
     public Vector2 interact(Pose pose){
