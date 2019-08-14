@@ -40,12 +40,15 @@ public class VectorField {
         Vector2 temp = new Vector2(destination.location.x, destination.location.y);
         temp.subtract(pose.toVector());
         Path output = new Path();
+        Vector2 temp2 = new Vector2();
 
         while(temp.magnitude() < thresholdForDestination) {
-            temp.add(getVector(pose));
-            pose.x = temp.x;
-            pose.y = temp.y;
-            output.wayPoint(temp.x, temp.y);
+            temp2 = getVector(pose);
+            temp2.setFromPolar(stepSize, temp2.angle());
+
+            pose.x += temp.x;
+            pose.y += temp.y;
+            output.wayPoint(pose.x, pose.y);
         }
         return output;
     }
