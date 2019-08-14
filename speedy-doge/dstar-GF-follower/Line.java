@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode;
+package dstar-GF-follower;
+
+import Universal.Math.Pose;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,32 +8,32 @@ import java.util.Collections;
 import java.util.List;
 
 public class Line {
-    Position p1;
-    Position p2;
+    Pose p1;
+    Pose p2;
 
     public void Line(){
-        p1 = new Position();
-        p2 = new Position();
+        p1 = new Pose();
+        p2 = new Pose();
     }
 
-    public Line(Position p1, Position p2){
+    public Line(Pose p1, Pose p2){
         this.p1 = p1;
         this.p2 = p2;
     }
 
-    public void setP1(Position p1){
+    public void setP1(Pose p1){
         this.p1 = p1;
     }
 
-    public void setP2(Position p2) {
+    public void setP2(Pose p2) {
         this.p2 = p2;
     }
 
-    public Position getP1() {
+    public Pose getP1() {
         return p1;
     }
 
-    public Position getP2() {
+    public Pose getP2() {
         return p2;
     }
 
@@ -39,35 +41,35 @@ public class Line {
         return p1.distanceTo(p2);
     }
 
-    public double distanceTo(Position p){
-        double m = (p2.getX() == p1.getX() ? 999 : ((p2.getY() - p1.getY()) / (p2.getX() - p1.getX())));
+    public double distanceTo(Pose p){
+        double m = (p2.x == p1.x ? 999 : ((p2.y - p1.y) / (p2.x - p1.x)));
         double m2 = -1 / m;
-        double b2 = p.getY() - (m2 * p.getX());
-        double b = p1.getY() - (m * p1.getX());
+        double b2 = p.y - (m2 * p.x);
+        double b = p1.y - (m * p1.x);
 
         double x = (b2 - b) / (m - m2);
         double y = (m * x) + b;
 
-        return Math.hypot(x - p.getX(), y - p.getY());
+        return Math.hypot(x - p.x, y - p.y);
     }
 
-    public Position closestPointTo(Position p){
-        double m = (p2.getX() == p1.getX() ? 999 : ((p2.getY() - p1.getY()) / (p2.getX() - p1.getX())));
+    public Pose closestPointTo(Pose p){
+        double m = (p2.x == p1.x ? 999 : ((p2.y - p1.y) / (p2.x - p1.x)));
         double m2 = -1 / m;
-        double b2 = p.getY() - (m2 * p.getX());
-        double b = p1.getY() - (m * p1.getX());
+        double b2 = p.y - (m2 * p.x);
+        double b = p1.y - (m * p1.x);
 
         double x = (b2 - b) / (m - m2);
         double y = (m * x) + b;
 
-        return new Position(x, y, Math.atan(m));
+        return new Pose(x, y, Math.atan(m));
     }
 
-    public List<Position> intersectWithCircleDeltas(Position center, double radius){
-        double baX = p2.getX() - p1.getX();
-        double baY = p2.getY() - p1.getY();
-        double caX = center.x - p1.getX();
-        double caY = center.y - p1.getY();
+    public List<Pose> intersectWithCircle(Pose center, double radius){
+        double baX = p2.x - p1.x;
+        double baY = p2.y - p1.y;
+        double caX = center.x - p1.x;
+        double caY = center.y - p1.y;
 
         double a = baX * baX + baY * baY;
         double bBy2 = baX * caX + baY * caY;
@@ -85,55 +87,55 @@ public class Line {
         double abScalingFactor1 = -pBy2 + tmpSqrt;
         double abScalingFactor2 = -pBy2 - tmpSqrt;
 
-        Position f_p1 = new Position(p1.getX() - baX * abScalingFactor1, p1.getY()
-                - baY * abScalingFactor1, Math.atan2(p2.getY() - p1.getY(), p2.getX() - p1.getX()));
+        Pose f_p1 = new Pose(p1.x - baX * abScalingFactor1, p1.y
+                - baY * abScalingFactor1, Math.atan2(p2.y - p1.y, p2.x - p1.x));
         if (disc == 0) { // abScalingFactor1 == abScalingFactor2
             return Collections.singletonList(f_p1);
         }
-        Position f_p2 = new Position(p1.getX() - baX * abScalingFactor2, p1.getY()
-                - baY * abScalingFactor2, Math.atan2(p2.getY() - p1.getY(), p2.getX() - p1.getX()));
+        Pose f_p2 = new Pose(p1.x - baX * abScalingFactor2, p1.y
+                - baY * abScalingFactor2, Math.atan2(p2.y - p1.y, p2.x - p1.x));
         return Arrays.asList(f_p1, p2);
     }
 
-    public boolean insideLine(Position p){
-        return ((p.getX() < p1.getX() && p.getX() > p2.getX()) && (p.getY() < p1.getY() && p.getY() > p2.getY())) || ((p.getX() > p1.getX() && p.getX() < p2.getX()) && (p.getY() > p1.getY() && p.getY() < p2.getY()));
+    public boolean insideLine(Pose p){
+        return ((p.x < p1.x && p.x > p2.x) && (p.y < p1.y && p.y > p2.y)) || ((p.x > p1.x && p.x < p2.x) && (p.y > p1.y && p.y < p2.y));
     }
 
-    public boolean isBehind(Position current, Position target){
-        Position new_target = closestPointTo(target);
-        Position new_current = closestPointTo(current);
+    public boolean isBehind(Pose current, Pose target){
+        Pose new_target = closestPointTo(target);
+        Pose new_current = closestPointTo(current);
 
-        double angle = Math.atan2(p2.getY() - p1.getY(), p2.getX() - p1.getX());
-        double m = (p2.getX() == p1.getX() ? 999 : ((p2.getY() - p1.getY()) / (p2.getX() - p1.getX())));
+        double angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+        double m = (p2.x == p1.x ? 999 : ((p2.y - p1.y) / (p2.x - p1.x)));
 
         double t1 = 0;
         double t2 = 0;
 
         if (angle > Math.PI / 2 || angle < -Math.PI / 2){
-            t1 = p1.getX() - new_current.getX();
-            t2 = p1.getX() - new_target.getX();
+            t1 = p1.x - new_current.x;
+            t2 = p1.x - new_target.x;
             return t2 < t1;
         }
         else if (angle < Math.PI / 2 && angle > -Math.PI / 2){
-            t1 = -p1.getX() + new_current.getX();
-            t2 = -p1.getX() + new_target.getX();
+            t1 = -p1.x + new_current.x;
+            t2 = -p1.x + new_target.x;
             return t2 < t1;
         }
         else if (angle == Math.PI / 2){
-            return new_target.getY() < new_current.getY();
+            return new_target.y < new_current.y;
         }
         else if (angle == -Math.PI / 2){
-            return new_target.getY() > new_current.getY();
+            return new_target.y > new_current.y;
         }
         return false;
     }
 
-    public List<Position> getLookaheadPoints(Position p, double r){
-        Position center = closestPointTo(p);
-        List<Position> deltas = intersectWithCircleDeltas(center, r);
+    public List<Pose> getLookaheadPoints(Pose p, double r){
+        Pose center = closestPointTo(p);
+        List<Pose> deltas = intersectWithCircle(center, r);
         int i = 0;
         while (i < deltas.size()){
-            Position potential = center.add(deltas.get(i));
+            Pose potential = deltas.get(i);
             if (insideLine(potential) && !isBehind(center, potential)){
                 deltas.set(i, potential);
                 i++;
