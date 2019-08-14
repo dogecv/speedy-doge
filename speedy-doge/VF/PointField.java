@@ -2,6 +2,7 @@ package VF;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
+import Universal.UniversalConstants;
 import Universal.UniversalFunctions;
 
 /**
@@ -13,6 +14,7 @@ public class PointField extends VectorFieldComponent {
     }
 
     public Vector2 interact(Pose position) {
+
         //zeroes the field at 0, 0, 0 and translates the position and destination to match
         Vector2 dest = getTarget().toVector().clone();
         dest.subtract(location.toVector());
@@ -23,7 +25,8 @@ public class PointField extends VectorFieldComponent {
 
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
-        double strength = getStrength(output.magnitude());
+        //TODO: make a modular robot class to accomodate various shapes of robots
+        double strength = getStrength(output.magnitude() - UniversalConstants.robot.polarVector(position.toVector().angle() - position.angle).magnitude());
 
         //if the obstical is in the way...
         if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.acos(output.magnitude() / dest.magnitude())){
