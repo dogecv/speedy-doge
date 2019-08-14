@@ -1,3 +1,5 @@
+package FRC_Pure_Pursuit.Tank;
+
 public class RateLimiter {
     double lastLimiterOutput = 0;
     public double rateLimit(double x, double maxRate, double timeBetweencalls){
