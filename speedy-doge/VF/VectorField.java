@@ -8,10 +8,10 @@ import java.util.ArrayList;
 //TODO: finish
 public class VectorField {
     public ArrayList<VectorFieldComponent> obsticals = new ArrayList<>();
-    public ArrayList<? extends Obstical> boundries = new ArrayList<>();
+    public ArrayList<Obstical> boundries = new ArrayList<>();
     public Waypoint destination;
 
-    public VectorField (ArrayList<VectorFieldComponent> obsticals, ArrayList<? extends Obstical> boundries) {
+    public VectorField (ArrayList<VectorFieldComponent> obsticals, ArrayList<Obstical> boundries) {
         this.obsticals = obsticals;
         this.boundries = boundries;
     }
