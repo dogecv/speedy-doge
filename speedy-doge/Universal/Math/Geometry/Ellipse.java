@@ -1,5 +1,6 @@
 package Universal.Math.Geometry;
 
+import FRC_Pure_Pursuit.Tank.Vector;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 
@@ -31,6 +32,12 @@ public class Ellipse extends Shape{
         double output = Math.acos(x / Math.hypot(x, y));
         if(y < 0)
             output *= -1;
+        return output;
+    }
+
+    public Vector2 getClosestVector(Vector2 pose){
+        Vector2 output = getClosestPoint(pose);
+        output.subtract(position.toVector());
         return output;
     }
 }

@@ -2,6 +2,8 @@ package Universal.Motion;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
+import Universal.UniversalConstants;
+import Universal.UniversalFunctions;
 
 public class TankOdometry {
     public final double ENC_PER_INCH;
@@ -42,5 +44,7 @@ public class TankOdometry {
         position.x += turnVector.x;
         position.y += turnVector.y;
         position.angle += angle;
+
+        UniversalConstants.robot.refreshLocation(position);
     }
 }

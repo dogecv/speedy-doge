@@ -1,9 +1,11 @@
 package Universal;
 
-import Universal.Math.Geometry.Rectangle;
 import Universal.Math.Pose;
 import VF.Objects.*;
 import VF.Boundry;
+import VF.Objects.RoverRuckus.Crater;
+import VF.Objects.RoverRuckus.Lander;
+import VF.Objects.RoverRuckus.SilverSample;
 import VF.VectorField;
 import VF.VectorFieldComponent;
 
@@ -14,8 +16,7 @@ public class UniversalConstants {
     //how big we treat the robot when avoiding obsticals
     public static final double EFFECTIVE_ROBOT_RADIUS = 9 * Math.sqrt(2) + 2;
 
-    //TODO: make a more modular version of this so that new shapes can be added to the rectangle for shortest distance calculations
-    public static Robot robot = new Robot();
+    public static Robot robot = new Robot(new Pose());
 
 
 

@@ -26,9 +26,9 @@ public class PointField extends VectorFieldComponent {
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
         //TODO: make a modular robot class to accomodate various shapes of robots
-        double strength = getStrength(output.magnitude() - UniversalConstants.robot.polarVector(position.toVector().angle() - position.angle).magnitude());
+        double strength = getStrength(output.magnitude() - UniversalConstants.robot.getClosestPoint(position).magnitude());
 
-        //if the obstical is in the way...
+        //if the obstacle is in the way...
         if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.acos(output.magnitude() / dest.magnitude())){
 
             //refedines the vector as perpendicular to its original direction
@@ -37,7 +37,7 @@ public class PointField extends VectorFieldComponent {
                 output.setFromPolar(strength, -output.angle());
         }
 
-        //if the obstical is out of the way...
+        //if the obstacle is out of the way...
         else {
 
             //shoot straight for the destination

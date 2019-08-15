@@ -1,4 +1,4 @@
-package VF.Objects;
+package VF.Objects.RoverRuckus;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;

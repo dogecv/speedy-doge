@@ -1,5 +1,6 @@
 package Universal.Math.Geometry;
 
+import FRC_Pure_Pursuit.Tank.Vector;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalFunctions;
@@ -83,6 +84,11 @@ public class Rectangle extends Shape {
         return outputVect;
     }
 
+    public Vector2 getClosestVector(Vector2 pose) {
+        Vector2 temp = position.toVector();
+        temp.subtract(pose);
+        return polarVector(temp.angle());
+    }
     public Vector2 polarVector (double angle) {
         angle -= position.angle;
         Vector2 output = new Vector2();

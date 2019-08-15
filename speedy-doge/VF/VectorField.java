@@ -36,6 +36,7 @@ public class VectorField {
         destination.location = location;
     }
 
+    //stepSize < thresholdForDestination
     public Path generatePath(Pose pose, double stepSize, double thresholdForDestination) {
         Vector2 temp = new Vector2(destination.location.x, destination.location.y);
         temp.subtract(pose.toVector());
