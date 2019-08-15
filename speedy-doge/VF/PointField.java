@@ -25,7 +25,6 @@ public class PointField extends VectorFieldComponent {
 
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
-        //TODO: make a modular robot class to accomodate various shapes of robots
         double strength = getStrength(output.magnitude() - UniversalConstants.robot.getClosestPoint(position).magnitude());
 
         //if the obstacle is in the way...
