@@ -10,6 +10,10 @@ import VF.VectorShapes.VectorEllipse;
  * Field: Rover Ruckus
  **/
 public class Crater extends VectorEllipse {
+    public Crater(Pose location){
+        super(location, 46.4, 51.4, 5, 2);
+    }
+    
     public Crater(Pose location, double strength, double falloff) {
         super(location, 46.4, 51.4, strength, falloff);
     }
