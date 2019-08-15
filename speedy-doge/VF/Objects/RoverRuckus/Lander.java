@@ -20,6 +20,10 @@ public class Lander extends VectorFieldComponent {
         //landerLeg2 represents the top left and bottom right lander legs
         landerLeg2 = new VectorRectangle(new Pose(location.x, location.y, location.angle - Math.PI / 2), 44.8, 0, strength, falloff);
     }
+    
+    public Lander(Pose location){
+        this(location, 12, 0.3);
+    }
 
     public Vector2 interact(Pose pose){
         //Compute the shortest distance away from each lander component
