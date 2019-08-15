@@ -22,7 +22,7 @@ public class Lander extends VectorFieldComponent {
     }
     
     public Lander(Pose location){
-        this(location, 12, 0.3);
+        this(location, 6, 0.1);
     }
 
     public Vector2 interact(Pose pose){
