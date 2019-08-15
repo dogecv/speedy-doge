@@ -7,7 +7,14 @@ import Universal.Math.Pose;
 import Universal.Math.Vector2;
 
 import java.util.ArrayList;
-
+/**
+* This class simplifies the robot's shape as an 18" square.
+* Location is updated in odometry classes.
+* A Robot object is defined in UniversalConstants which is used to estimate the minimum distane between the robot and a given point.
+* Various shapes can be added to the components ArrayList to create a more accurate, customized robot shape.
+* By default, the robot faces the positive Y axis
+*/
+//TODO: adjust component locations for backwards PP tank driving
 public class Robot extends Rectangle {
     public ArrayList<Shape> components = new ArrayList<Shape>();
     public Robot(Pose location){
