@@ -15,11 +15,13 @@ public class Ellipse extends Shape{
     }
 
     public Vector2 getClosestPoint (Vector2 point) {
-        double m = (point.y - position.y) / (point.x - position.x);
-        double x = Math.sqrt(1/(Math.pow(1/r1, 2) + Math.pow(m/r2, 2)));
-        x *= point.x > position.x ? 1 : -1;
-        double y = m * x;
-        return new Vector2 (position.x + x, position.y + y);
+        point.subtract(position.toVector());
+        point.rotate(-position.angle);
+        double newTheta = Math.atan2(point.y * r2, point.x * r1);
+        point = new Vector2(point.x - r2 * Math.cos(newTheta), point.y - r1 * Math.sin(newTheta));
+        point.rotate(position.angle);
+        point.add(position.toVector());
+        return point;
     }
 
     public double slope (double theta) {
