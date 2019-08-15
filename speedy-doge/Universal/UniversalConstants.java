@@ -23,25 +23,25 @@ public class UniversalConstants {
     public static VectorField initializeRoverRuckusField(){
         FieldWall wall= new FieldWall();
 
-        Lander lander = new Lander(new Pose(0, 0, Math.PI/4), 1, 1);
+        Lander lander = new Lander(new Pose(0, 0, Math.PI/4));
 
-        Crater crater1 = new Crater(new Pose(-72, 72, 0), 1, 1);
-        Crater crater2 = new Crater(new Pose(72, -72, 0), 1, 1);
+        Crater crater1 = new Crater(new Pose(-72, 72, 0));
+        Crater crater2 = new Crater(new Pose(72, -72, 0));
 
-        SilverSample centerSampleq1 = new SilverSample(new Pose(36,36,0), 1, 1);
-        SilverSample centerSampleq2 = new SilverSample(new Pose(-36,36,0), 1, 1);
-        SilverSample centerSampleq3 = new SilverSample(new Pose(-36,-36,0), 1, 1);
-        SilverSample centerSampleq4 = new SilverSample(new Pose(36,-36,0), 1, 1);
+        SilverSample centerSampleq1 = new SilverSample(new Pose(36,36,0));
+        SilverSample centerSampleq2 = new SilverSample(new Pose(-36,36,0));
+        SilverSample centerSampleq3 = new SilverSample(new Pose(-36,-36,0));
+        SilverSample centerSampleq4 = new SilverSample(new Pose(36,-36,0));
 
-        SilverSample leftSampleq1 = new SilverSample(new Pose(25,47,0), 1, 1);
-        SilverSample leftSampleq2 = new SilverSample(new Pose(-47,25,0), 1, 1);
-        SilverSample leftSampleq3 = new SilverSample(new Pose(-25,-47,0), 1, 1);
-        SilverSample leftSampleq4 = new SilverSample(new Pose(47,-25,0), 1, 1);
+        SilverSample leftSampleq1 = new SilverSample(new Pose(25,47,0));
+        SilverSample leftSampleq2 = new SilverSample(new Pose(-47,25,0));
+        SilverSample leftSampleq3 = new SilverSample(new Pose(-25,-47,0));
+        SilverSample leftSampleq4 = new SilverSample(new Pose(47,-25,0));
 
-        SilverSample rightSampleq1 = new SilverSample(new Pose(47,25,0), 1, 1);
-        SilverSample rightSampleq2 = new SilverSample(new Pose(-25,47,0), 1, 1);
-        SilverSample rightSampleq3 = new SilverSample(new Pose(-47,-25,0), 1, 1);
-        SilverSample rightSampleq4 = new SilverSample(new Pose(25,-47,0), 1, 1);
+        SilverSample rightSampleq1 = new SilverSample(new Pose(47,25,0));
+        SilverSample rightSampleq2 = new SilverSample(new Pose(-25,47,0));
+        SilverSample rightSampleq3 = new SilverSample(new Pose(-47,-25,0));
+        SilverSample rightSampleq4 = new SilverSample(new Pose(25,-47,0));
 
         ArrayList<VectorFieldComponent> obsticals = new ArrayList<>();
 
