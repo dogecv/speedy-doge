@@ -20,57 +20,6 @@ public class UniversalConstants {
         return new Robot(location);
     }
 
-
-    public static VectorField initializeRoverRuckusField(){
-        FieldWall wall= new FieldWall();
-
-        Lander lander = new Lander(new Pose(0, 0, Math.PI/4));
-
-        Crater crater1 = new Crater(new Pose(-72, 72, 0));
-        Crater crater2 = new Crater(new Pose(72, -72, 0));
-
-        SilverSample centerSampleq1 = new SilverSample(new Pose(36,36,0));
-        SilverSample centerSampleq2 = new SilverSample(new Pose(-36,36,0));
-        SilverSample centerSampleq3 = new SilverSample(new Pose(-36,-36,0));
-        SilverSample centerSampleq4 = new SilverSample(new Pose(36,-36,0));
-
-        SilverSample leftSampleq1 = new SilverSample(new Pose(25,47,0));
-        SilverSample leftSampleq2 = new SilverSample(new Pose(-47,25,0));
-        SilverSample leftSampleq3 = new SilverSample(new Pose(-25,-47,0));
-        SilverSample leftSampleq4 = new SilverSample(new Pose(47,-25,0));
-
-        SilverSample rightSampleq1 = new SilverSample(new Pose(47,25,0));
-        SilverSample rightSampleq2 = new SilverSample(new Pose(-25,47,0));
-        SilverSample rightSampleq3 = new SilverSample(new Pose(-47,-25,0));
-        SilverSample rightSampleq4 = new SilverSample(new Pose(25,-47,0));
-
-        ArrayList<VectorFieldComponent> obsticals = new ArrayList<>();
-
-        obsticals.add(lander);
-        obsticals.add(crater1);
-        obsticals.add(crater2);
-
-        obsticals.add(centerSampleq1);
-        obsticals.add(centerSampleq2);
-        obsticals.add(centerSampleq3);
-        obsticals.add(centerSampleq4);
-
-        obsticals.add(leftSampleq1);
-        obsticals.add(leftSampleq2);
-        obsticals.add(leftSampleq3);
-        obsticals.add(leftSampleq4);
-
-        obsticals.add(rightSampleq1);
-        obsticals.add(rightSampleq2);
-        obsticals.add(rightSampleq3);
-        obsticals.add(rightSampleq4);
-
-        ArrayList<Boundry> boundries = new ArrayList<>();
-
-        boundries.add(wall);
-
-        VectorField rr2Field = new VectorField(obsticals,boundries);
-
-        return rr2Field;
-    }
+    //TODO: turn this into a function, not a constant
+    public static double MINIMUM_APPROACH_DISTANCE = 20;
 }
