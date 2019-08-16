@@ -45,6 +45,5 @@ public class TankOdometry {
         position.y += turnVector.y;
         position.angle += angle;
 
-        UniversalConstants.robot.refreshLocation(position);
     }
 }

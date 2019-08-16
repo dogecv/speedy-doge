@@ -2,6 +2,7 @@ package VF;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
+import VF.Objects.Robot;
 
 /**
  * All objects that sum to create the VectorField's output vector are VectorFieldComponents
@@ -41,6 +42,7 @@ public abstract class VectorFieldComponent implements ActivatableComponent {
         target = point.clone();
         location.angle = Math.atan2(point.y - location.y, point.x - location.x);
     }
+
     /*
     returns target
      */

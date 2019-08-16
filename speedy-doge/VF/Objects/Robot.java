@@ -20,7 +20,9 @@ public class Robot extends Rectangle {
     public Robot(Pose location){
         super(location, 18,18);
     }
-
+    public Robot(){
+        this(new Pose());
+    }
     public void addComponent(Shape shape) {
         components.add(shape);
     }

@@ -1,6 +1,7 @@
 package VF.Objects.RoverRuckus;
 
 import Universal.Math.Pose;
+import VF.Objects.Robot;
 import VF.VectorShapes.VectorCircle;
 
 /**

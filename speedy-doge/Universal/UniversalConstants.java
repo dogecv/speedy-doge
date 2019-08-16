@@ -16,8 +16,9 @@ public class UniversalConstants {
     //how big we treat the robot when avoiding obsticals
     public static final double EFFECTIVE_ROBOT_RADIUS = 9 * Math.sqrt(2) + 2;
 
-    public static Robot robot = new Robot(new Pose());
-
+    public static Robot getRobot(Pose location){
+        return new Robot(location);
+    }
 
 
     public static VectorField initializeRoverRuckusField(){

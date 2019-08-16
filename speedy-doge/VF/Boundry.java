@@ -2,6 +2,7 @@ package VF;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
+import VF.Objects.Robot;
 
 /**
  * All objects that modify the output vector of a VectorField after all VectorFieldComponent vectors are added

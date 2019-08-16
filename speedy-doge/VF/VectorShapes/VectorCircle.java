@@ -2,6 +2,7 @@ package VF.VectorShapes;
 
 import Universal.Math.Geometry.Circle;
 import Universal.Math.Pose;
+import VF.Objects.Robot;
 
 /**
  * VectorShape in the form of a circle

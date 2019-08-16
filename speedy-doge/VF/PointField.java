@@ -4,6 +4,7 @@ import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalConstants;
 import Universal.UniversalFunctions;
+import VF.Objects.Robot;
 
 /**
  * VectorFieldComponent that when interacted with, directs position away from location and towards target
@@ -14,7 +15,7 @@ public class PointField extends VectorFieldComponent {
     }
 
     public Vector2 interact(Pose position) {
-
+        Robot robot = UniversalConstants.getRobot(position);
         //zeroes the field at 0, 0, 0 and translates the position and destination to match
         Vector2 dest = getTarget().toVector().clone();
         dest.subtract(location.toVector());
@@ -25,7 +26,7 @@ public class PointField extends VectorFieldComponent {
 
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
-        double strength = getStrength(output.magnitude() - UniversalConstants.robot.getClosestPoint(position).magnitude());
+        double strength = getStrength(output.magnitude() - robot.getClosestPoint(position).magnitude());
 
         //if the obstacle is in the way...
         if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.acos(output.magnitude() / dest.magnitude())){

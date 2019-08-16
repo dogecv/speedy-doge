@@ -3,6 +3,7 @@ package VF.Objects.RoverRuckus;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalFunctions;
+import VF.Objects.Robot;
 import VF.VectorFieldComponent;
 import VF.VectorShapes.VectorRectangle;
 /**
@@ -20,7 +21,7 @@ public class Lander extends VectorFieldComponent {
         //landerLeg2 represents the top left and bottom right lander legs
         landerLeg2 = new VectorRectangle(new Pose(location.x, location.y, location.angle - Math.PI / 2), 44.8, 0, strength, falloff);
     }
-    
+
     public Lander(Pose location){
         this(location, 6, 0.1);
     }
