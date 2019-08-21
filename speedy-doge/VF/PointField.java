@@ -47,6 +47,7 @@ public class PointField extends VectorFieldComponent {
 
         //rotates the vector back to its original angle
         output.rotate(-dest.angle());
+        output.x *= -1;
         return output;
     }
 }
