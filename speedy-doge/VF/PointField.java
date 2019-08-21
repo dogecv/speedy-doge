@@ -8,6 +8,7 @@ import VF.Objects.Robot;
 
 /**
  * VectorFieldComponent that when interacted with, directs position away from location and towards target
+ * TESTED
  */
 public class PointField extends VectorFieldComponent {
     public PointField (Pose location, double strength, double falloff) {
@@ -30,7 +31,6 @@ public class PointField extends VectorFieldComponent {
 
         //if the obstacle is in the way...
         if(UniversalFunctions.normalizeAngle180Radians(output.angle()) > Math.acos(output.magnitude() / dest.magnitude())){
-          	System.out.println("yes");
             //refedines the vector as perpendicular to its original direction
             output.setFromPolar(strength, output.angle() + Math.PI / 2);
             if(point.y > 0)
