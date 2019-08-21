@@ -29,25 +29,23 @@ public class PointField extends VectorFieldComponent {
         double strength = getStrength(output.magnitude() - robot.getClosestPoint(position).magnitude());
 
         //if the obstacle is in the way...
-        if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.acos(output.magnitude() / dest.magnitude())){
-
+        if(UniversalFunctions.normalizeAngle180Radians(output.angle()) > Math.acos(output.magnitude() / dest.magnitude())){
+          	System.out.println("yes");
             //refedines the vector as perpendicular to its original direction
             output.setFromPolar(strength, output.angle() + Math.PI / 2);
             if(point.y > 0)
                 output.setFromPolar(strength, -output.angle());
+          	output.rotate(-dest.angle());
+    		output.x *= -1;
         }
 
         //if the obstacle is out of the way...
         else {
 
             //shoot straight for the destination
-            output = new Vector2(dest.x - output.x, dest.y - output.y);
+            output = new Vector2(dest.x - position.x, dest.y - position.y);
             output.setFromPolar(strength, output.angle());
         }
-
-        //rotates the vector back to its original angle
-        output.rotate(-dest.angle());
-        output.x *= -1;
         return output;
     }
 }
