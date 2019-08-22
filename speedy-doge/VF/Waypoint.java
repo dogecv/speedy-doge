@@ -6,6 +6,7 @@ import Universal.UniversalFunctions;
 
 /**
  * A Waypoint creates a VectorFieldComponent at the destination: either an AttractionField or a Solanoid
+ * TESTED
  */
 public class Waypoint {
     //destination location
@@ -75,18 +76,16 @@ public class Waypoint {
             super(location, strength, falloff);
         }
 
-
-        public Vector2 interact (Pose position) {
+	    public Vector2 interact (Pose position) {
             //change coordinates to be relative to location
             Vector2 output = position.toVector();
             output.subtract(location.toVector());
 
             //sets the magnitude and angle of the output vector to point towards location
-            output.setFromPolar(getStrength(output.magnitude()), output.angle());
+            output.setFromPolar(-1, output.angle());
             return output;
         }
-
-        @Override
+      
         public double getStrength(double d){
             //if the field is currently in use...
             if(!isActive())
@@ -109,27 +108,22 @@ public class Waypoint {
 
         public Vector2 interact (Pose position) {
             //if the field is currently active...
-            if(isActive()) {
+            if(super.isActive()) {
                 //zeroes the field at 0, 0, 0 and translates the position to match
                 Vector2 output = new Vector2();
                 output.x = position.x - location.x;
                 output.y = position.y - location.y;
                 output.rotate(-location.angle);
-
+              	System.out.println(output);
                 //calculates the radius of the ring of the solanoid
                 double magnitude = getStrength(output.magnitude());
                 double radius = (Math.pow(output.x, 2) + Math.pow(output.y, 2)) / (2 * output.y);
                 output.y -= radius;
-
-                //sets the output vector tangent to the ring
-                output.rotate(Math.PI / 2 * Math.signum(output.y));
-
                 //renormalizes the output vector and sets the output's magnitude
                 output.setFromPolar(magnitude, output.angle() + location.angle);
                 return output;
             }
-            return new Vector2();
-        }
+            return new Vector2();        }
 
         @Override
         public Pose getTarget(){
