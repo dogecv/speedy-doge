@@ -8,7 +8,7 @@ public class Ellipse extends Shape{
     public double r1, r2;
     public Pose position;
 
-    public Ellipse (Pose position, double r1, double r2) {
+    public Ellipse (Pose position, double r2, double r1) {
         this.position = position;
         this.r1 = r1;
         this.r2 = r2;
@@ -18,7 +18,7 @@ public class Ellipse extends Shape{
         point.subtract(position.toVector());
         point.rotate(-position.angle);
         double newTheta = Math.atan2(point.y * r2, point.x * r1);
-        point = new Vector2(point.x - r2 * Math.cos(newTheta), point.y - r1 * Math.sin(newTheta));
+        point = new Vector2(r2 * Math.cos(newTheta), r1 * Math.sin(newTheta));
         point.rotate(position.angle);
         point.add(position.toVector());
         return point;
