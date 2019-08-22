@@ -26,7 +26,11 @@ public class VectorShape extends PointField {
     @Override
     public Vector2 interact(Pose pose){
         Vector2 vectorLocation = shape.getClosestPoint(pose.toVector());
-        location = new Pose(vectorLocation.x, vectorLocation.y, location.angle);
+        setLocation(new Pose(vectorLocation.x, vectorLocation.y, location.angle));
         return super.interact(pose);
+    }
+  
+    private void setLocation(Pose loc){
+  	   location = loc;
     }
 }
