@@ -5,6 +5,10 @@ import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalFunctions;
 
+/**
+* TESTED
+*/
+
 public class Rectangle extends Shape {
 
     public double width, height;
