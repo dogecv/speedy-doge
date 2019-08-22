@@ -32,5 +32,7 @@ public class VectorShape extends PointField {
   
     private void setLocation(Pose loc){
   	   location = loc;
+       location.x += shape.position.x;
+       location.y += shape.position.y;
     }
 }
