@@ -2,15 +2,21 @@ package VF;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
+import Universal.UniversalConstants;
 import Universal.UniversalFunctions;
+import VF.Objects.Robot;
 
+/**
+ * VectorFieldComponent that when interacted with, directs position away from location and towards target
+ * TESTED
+ */
 public class PointField extends VectorFieldComponent {
     public PointField (Pose location, double strength, double falloff) {
         super(location, strength, falloff);
     }
 
-    //given a destination, creates the vector induced by the field at position
     public Vector2 interact(Pose position) {
+        Robot robot = UniversalConstants.getRobot(position);
         //zeroes the field at 0, 0, 0 and translates the position and destination to match
         Vector2 dest = getTarget().toVector().clone();
         dest.subtract(location.toVector());
@@ -21,27 +27,25 @@ public class PointField extends VectorFieldComponent {
 
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
-        double strength = getStrength(output.magnitude());
+        double strength = getStrength(output.magnitude() - robot.getClosestPoint(position).magnitude());
 
-        //if the obstical is in the way...
-        if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.acos(output.magnitude() / dest.magnitude())){
-
+        //if the obstacle is in the way...
+        if(UniversalFunctions.normalizeAngle180Radians(output.angle()) > Math.acos(output.magnitude() / dest.magnitude())){
             //refedines the vector as perpendicular to its original direction
             output.setFromPolar(strength, output.angle() + Math.PI / 2);
             if(point.y > 0)
                 output.setFromPolar(strength, -output.angle());
+          	output.rotate(-dest.angle());
+    		output.x *= -1;
         }
 
-        //if the obstical is out of the way...
+        //if the obstacle is out of the way...
         else {
 
             //shoot straight for the destination
-            output = new Vector2(dest.x - output.x, dest.y - output.y);
+            output = new Vector2(dest.x - position.x, dest.y - position.y);
             output.setFromPolar(strength, output.angle());
         }
-
-        //rotates the vector back to its original angle
-        output.rotate(dest.angle());
         return output;
     }
 }

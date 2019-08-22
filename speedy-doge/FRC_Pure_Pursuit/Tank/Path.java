@@ -1,3 +1,5 @@
+package FRC_Pure_Pursuit.Tank;
+
 import java.util.ArrayList;
 
 public class Path{
@@ -28,7 +30,7 @@ public class Path{
         return coords;
     }
 
-    private void wayPoint(double x1, double y1){
+    public void wayPoint(double x1, double y1){
         coords.add(new double[]{x1, y1});
     }
 
