@@ -4,6 +4,9 @@ import FRC_Pure_Pursuit.Tank.Vector;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 
+/**
+* TESTED
+*/
 public class Ellipse extends Shape{
     public double r1, r2;
     public Pose position;
