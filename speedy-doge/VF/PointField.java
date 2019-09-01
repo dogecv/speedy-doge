@@ -16,7 +16,7 @@ public class PointField extends VectorFieldComponent {
     }
 
     public Vector2 interact(Pose position) {
-        Robot robot = UniversalConstants.getRobot(position);
+        //Robot robot = UniversalConstants.getRobot(position);
         //zeroes the field at 0, 0, 0 and translates the position and destination to match
         Vector2 dest = getTarget().toVector().clone();
         dest.subtract(location.toVector());
@@ -27,24 +27,30 @@ public class PointField extends VectorFieldComponent {
 
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
-        double strength = getStrength(output.magnitude() - robot.getClosestPoint(position).magnitude());
+        double strength = getStrength(output.magnitude()/* - robot.getClosestPoint(position).magnitude()*/);
 
+
+        System.out.println(Math.acos(output.magnitude() / dest.magnitude()));
+        System.out.println(UniversalFunctions.normalizeAngle180Radians(output.angle()));
         //if the obstacle is in the way...
-        if(UniversalFunctions.normalizeAngle180Radians(output.angle()) > Math.acos(output.magnitude() / dest.magnitude())){
+        if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.abs(Math.acos(output.magnitude() / dest.magnitude()))&& point.magnitude() < dest.magnitude()){
             //refedines the vector as perpendicular to its original direction
             output.setFromPolar(strength, output.angle() + Math.PI / 2);
             if(point.y > 0)
                 output.setFromPolar(strength, -output.angle());
-          	output.rotate(-dest.angle());
-    		output.x *= -1;
+            output.x = Math.abs(output.x);
+
+            output.rotate(dest.angle());
+
         }
 
         //if the obstacle is out of the way...
         else {
 
             //shoot straight for the destination
-            output = new Vector2(dest.x - position.x, dest.y - position.y);
+            output = new Vector2(dest.magnitude() - output.x, -output.y);
             output.setFromPolar(strength, output.angle());
+            output.rotate(dest.angle());
         }
         return output;
     }
