@@ -64,8 +64,6 @@ public class RoverRuckusField extends VectorField {
         SilverSample rightSampleq3 = new SilverSample(new Pose(-47,-25,0));
         SilverSample rightSampleq4 = new SilverSample(new Pose(25,-47,0));
 
-        ArrayList<VectorFieldComponent> obsticals = new ArrayList<>();
-
         obsticals.add(lander);
         obsticals.add(crater1);
         obsticals.add(crater2);
@@ -85,7 +83,6 @@ public class RoverRuckusField extends VectorField {
         obsticals.add(rightSampleq3);
         obsticals.add(rightSampleq4);
 
-        ArrayList<Boundry> boundries = new ArrayList<>();
 
         boundries.add(wall);
 

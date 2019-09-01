@@ -12,7 +12,7 @@ import VF.VectorShapes.VectorEllipse;
  **/
 public class Crater extends VectorEllipse {
     public Crater(Pose location){
-        super(location, 46.4, 51.4, 5, 2);
+        super(location, 46.4, 51.4, 24, 1);
     }
     
     public Crater(Pose location, double strength, double falloff) {

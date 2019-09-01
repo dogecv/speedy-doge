@@ -21,6 +21,7 @@ public class VectorField {
         this.obsticals = obsticals;
         this.boundries = boundries;
         calculateBarriers();
+        destination = new Waypoint(new Pose());
     }
     public Vector2 getVector (Pose point) {
         Vector2 output = new Vector2();
@@ -34,7 +35,6 @@ public class VectorField {
         }
 
         output.add(destination.interact(point));
-
         for(Boundry boundry : boundries) {
             output = boundry.interact(point, output);
         }
@@ -54,14 +54,15 @@ public class VectorField {
         temp.subtract(pose.toVector());
         Path output = new Path();
         Vector2 temp2 = new Vector2();
-
-        while(temp.magnitude() < thresholdForDestination) {
+        while(temp.magnitude() > thresholdForDestination) {
             temp2 = getVector(pose);
             temp2.setFromPolar(stepSize, temp2.angle());
-
-            pose.x += temp.x;
-            pose.y += temp.y;
+            pose.x += temp2.x;
+            pose.y += temp2.y;
             output.wayPoint(pose.x, pose.y);
+
+            temp = new Vector2(destination.location.x, destination.location.y);
+            temp.subtract(pose.toVector());
         }
         return output;
     }

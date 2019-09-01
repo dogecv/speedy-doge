@@ -17,7 +17,7 @@ public abstract class VectorFieldComponent implements ActivatableComponent {
     //is the field active or not?
     private boolean isActive = true;
     //the destination point of a given path
-    private Pose target;
+    public Pose target;
 
     public VectorFieldComponent (Pose location, double strength, double falloff) {
         this.strength = strength;
@@ -39,8 +39,9 @@ public abstract class VectorFieldComponent implements ActivatableComponent {
     sets target
      */
     public void setTarget(Pose point) {
-        target = point.clone();
+        target = point;
         location.angle = Math.atan2(point.y - location.y, point.x - location.x);
+        System.out.println(target);
     }
 
     /*

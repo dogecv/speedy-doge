@@ -17,13 +17,13 @@ public class Lander extends VectorFieldComponent {
         //landerBody represents the Lander's cargo holds
         landerBody = new VectorRectangle(location, 23.3, 23.3, strength, falloff);
         //landerLeg1 represents the top right and bottom left lander legs
-        landerLeg1 = new VectorRectangle(location, 44.8, 0, strength, falloff);
+        landerLeg1 = new VectorRectangle(new Pose(location.x, location.y, location.angle + Math.PI / 4), 63, 0, strength, falloff);
         //landerLeg2 represents the top left and bottom right lander legs
-        landerLeg2 = new VectorRectangle(new Pose(location.x, location.y, location.angle - Math.PI / 2), 44.8, 0, strength, falloff);
+        landerLeg2 = new VectorRectangle(new Pose(location.x, location.y, location.angle - Math.PI / 4), 63, 0, strength, falloff);
     }
 
     public Lander(Pose location){
-        this(location, 6, 0.1);
+        this(location, 24, 1);
     }
 
     public Vector2 interact(Pose pose){
@@ -42,5 +42,13 @@ public class Lander extends VectorFieldComponent {
         else
             output = landerLeg2.interact(pose);
         return output;
+    }
+
+
+    @Override
+    public void setTarget(Pose pose){
+        landerBody.setTarget(pose);
+        landerLeg1.setTarget(pose);
+        landerLeg2.setTarget(pose);
     }
 }

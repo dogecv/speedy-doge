@@ -30,8 +30,6 @@ public class PointField extends VectorFieldComponent {
         double strength = getStrength(output.magnitude()/* - robot.getClosestPoint(position).magnitude()*/);
 
 
-        System.out.println(Math.acos(output.magnitude() / dest.magnitude()));
-        System.out.println(UniversalFunctions.normalizeAngle180Radians(output.angle()));
         //if the obstacle is in the way...
         if(Math.abs(UniversalFunctions.normalizeAngle180Radians(output.angle())) > Math.abs(Math.acos(output.magnitude() / dest.magnitude()))&& point.magnitude() < dest.magnitude()){
             //refedines the vector as perpendicular to its original direction

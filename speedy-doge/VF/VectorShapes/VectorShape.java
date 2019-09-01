@@ -29,7 +29,7 @@ public class VectorShape extends PointField {
         setLocation(new Pose(vectorLocation.x, vectorLocation.y, location.angle));
         return super.interact(pose);
     }
-  
+
     private void setLocation(Pose loc){
   	   location = loc;
        location.x += shape.position.x;

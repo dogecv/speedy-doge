@@ -114,7 +114,6 @@ public class Waypoint {
                 output.x = position.x - location.x;
                 output.y = position.y - location.y;
                 output.rotate(-location.angle);
-              	System.out.println(output);
                 //calculates the radius of the ring of the solanoid
                 double magnitude = getStrength(output.magnitude());
                 double radius = (Math.pow(output.x, 2) + Math.pow(output.y, 2)) / (2 * output.y);
