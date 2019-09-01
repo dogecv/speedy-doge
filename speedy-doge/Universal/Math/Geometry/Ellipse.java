@@ -17,6 +17,7 @@ public class Ellipse extends Shape{
         this.r2 = r2;
     }
 
+    //TODO: return an exact solution instead of an approximation
     public Vector2 getClosestPoint (Vector2 point) {
         point.subtract(position.toVector());
         point.rotate(-position.angle);

@@ -36,9 +36,9 @@ public class Rectangle extends Shape {
                 pose.y -= height/2;
                 outputVect = new Vector2(width/2, height/2);
                 if (pose.y < 0)
-                    outputVect.y += pose.y;
+                    outputVect.y -= pose.y;
                 else if (pose.x < 0)
-                    outputVect.x += pose.x;
+                    outputVect.x -= pose.x;
 
                 pose.x += width / 2;
                 pose.y += height/2;
@@ -48,9 +48,9 @@ public class Rectangle extends Shape {
                 pose.y -= height/2;
                 outputVect = new Vector2(-width/2, height/2);
                 if (pose.y < 0)
-                    outputVect.y += pose.y;
+                    outputVect.y -= pose.y;
                 else if (pose.x > 0)
-                    outputVect.x -= pose.x;
+                    outputVect.x += pose.x;
 
                 pose.x -= width / 2;
                 pose.y += height/2;
@@ -62,9 +62,9 @@ public class Rectangle extends Shape {
                 pose.y += height/2;
                 outputVect = new Vector2(width/2, -height/2);
                 if (pose.y > 0)
-                    outputVect.y -= pose.y;
+                    outputVect.y += pose.y;
                 else if (pose.x < 0)
-                    outputVect.x += pose.x;
+                    outputVect.x -= pose.x;
 
                 pose.x += width / 2;
                 pose.y -= height/2;
@@ -74,9 +74,9 @@ public class Rectangle extends Shape {
                 pose.y += height/2;
                 outputVect = new Vector2(-width/2, -height/2);
                 if (pose.y > 0)
-                    outputVect.y -= pose.y;
+                    outputVect.y += pose.y;
                 else if (pose.x > 0)
-                    outputVect.x -= pose.x;
+                    outputVect.x += pose.x;
 
                 pose.x -= width / 2;
                 pose.y -= height/2;
