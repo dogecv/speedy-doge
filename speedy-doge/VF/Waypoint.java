@@ -83,6 +83,9 @@ public class Waypoint {
 
             //sets the magnitude and angle of the output vector to point towards location
             output.setFromPolar(-1, output.angle());
+
+            //TODO:
+            output = new Vector2();
             return output;
         }
       

@@ -35,6 +35,7 @@ public class VectorField {
         }
 
         output.add(destination.interact(point));
+
         for(Boundry boundry : boundries) {
             output = boundry.interact(point, output);
         }
@@ -54,17 +55,51 @@ public class VectorField {
         temp.subtract(pose.toVector());
         Path output = new Path();
         Vector2 temp2 = new Vector2();
-        while(temp.magnitude() > thresholdForDestination) {
+        String st = "";
+        double min = temp.magnitude();
+        int counter = 0;
+        while(temp.magnitude() > thresholdForDestination && counter < 100) {
+            counter ++;
             temp2 = getVector(pose);
             temp2.setFromPolar(stepSize, temp2.angle());
             pose.x += temp2.x;
             pose.y += temp2.y;
             output.wayPoint(pose.x, pose.y);
+            st+= pose.toVector().toString() + ", ";
 
             temp = new Vector2(destination.location.x, destination.location.y);
             temp.subtract(pose.toVector());
+            min = Math.min(temp.magnitude(), min);
         }
+
+        System.out.println(st);
         return output;
+
+    }
+//TODO: calculate boundry conditions after the center path is generated
+    public Path generateCenterPath(Pose pose, double stepSize, double thresholdForDestination){
+        Pose leftSide = new Pose(0, 9, 0), rightSide = new Pose(0, -9, 0);
+        leftSide.rotate(pose.angle);
+        rightSide.rotate(pose.angle);
+        leftSide.add(pose);
+        rightSide.add(pose);
+        Path path1 = generatePath(leftSide, stepSize, thresholdForDestination);
+        Path path2 = generatePath(rightSide, stepSize, thresholdForDestination);
+        Path shortPath = path1, longPath = path2;
+        if(path1.getTotalPathLength() > path2.getTotalPathLength()){
+            shortPath = path2;
+            longPath = path1;
+        }
+        double length = shortPath.getTotalPathLength();
+        Path outputPath = new Path();
+        for(int i = 1; i < shortPath.getSize(); i++){
+            Vector2 v1 = longPath.pointOnPathByPercentage(i/length);
+            Vector2 v2 = new Vector2(shortPath.getCoords().get(i)[0], shortPath.getCoords().get(i)[1]);
+            v1.add(v2);
+            v1.scalarMultiply(0.5);
+            outputPath.wayPoint(v1.x, v1.y);
+        }
+        return outputPath;
     }
 
     public void calculateBarriers(VectorFieldComponent field1, VectorFieldComponent field2){
