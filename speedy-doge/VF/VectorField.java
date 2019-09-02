@@ -1,26 +1,22 @@
 package VF;
 
 import FRC_Pure_Pursuit.Tank.Path;
-import FRC_Pure_Pursuit.Tank.Vector;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
-import Universal.Math.Geometry.Rectangle;
-import Universal.Math.Geometry.Shape;
 import Universal.UniversalConstants;
-import VF.Objects.Robot;
 import VF.VectorShapes.VectorRectangle;
 
 import java.util.ArrayList;
 
 public class VectorField {
-    public ArrayList<VectorFieldComponent> obsticals = new ArrayList<>();
-    public ArrayList<Boundry> boundries = new ArrayList<>();
+    public ArrayList<VectorFieldComponent> obstacles = new ArrayList<>();
+    public ArrayList<Boundary> boundaries = new ArrayList<>();
     public ArrayList<VectorRectangle> barriers = new ArrayList<>();
     public Waypoint destination;
 
-    public VectorField (ArrayList<VectorFieldComponent> obsticals, ArrayList<Boundry> boundries) {
-        this.obsticals = obsticals;
-        this.boundries = boundries;
+    public VectorField (ArrayList<VectorFieldComponent> obstacles, ArrayList<Boundary> boundaries) {
+        this.obstacles = obstacles;
+        this.boundaries = boundaries;
         calculateBarriers();
         destination = new Waypoint(new Pose());
     }
@@ -32,22 +28,22 @@ public class VectorField {
             output.add(barrier.interact(point));
         }
 
-        for (VectorFieldComponent obstical : obsticals) {
-            output.add(obstical.interact(point));
+        for (VectorFieldComponent obstacle : obstacles) {
+            output.add(obstacle.interact(point));
         }
 
         output.add(destination.interact(point));
 
-        for(Boundry boundry : boundries) {
-            output = boundry.interact(point, output);
+        for(Boundary boundary : boundaries) {
+            output = boundary.interact(point, output);
         }
         return output;
 
     }
 
     public void setWaypoint(Pose location) {
-        for(int i = 0; i < obsticals.size(); i++){
-            obsticals.get(i).setTarget(location);
+        for(int i = 0; i < obstacles.size(); i++){
+            obstacles.get(i).setTarget(location);
         }
         destination.location = location;
     }
@@ -79,7 +75,7 @@ public class VectorField {
         return output;
 
     }
-//TODO: calculate boundry conditions after the center path is generated
+//TODO: calculate boundary conditions after the center path is generated
     public Path generateCenterPath(Pose pose, double stepSize, double thresholdForDestination){
         Pose leftSide = new Pose(0, 9, 0), rightSide = new Pose(0, -9, 0);
         leftSide.rotate(pose.angle);
@@ -121,9 +117,9 @@ public class VectorField {
 
     public void calculateBarriers(){
         barriers = new ArrayList<>();
-        for(int i = 0; i < obsticals.size(); i++){
-            for(int j = i; j < obsticals.size(); j++){
-                calculateBarriers(obsticals.get(i), obsticals.get(j));
+        for(int i = 0; i < obstacles.size(); i++){
+            for(int j = i; j < obstacles.size(); j++){
+                calculateBarriers(obstacles.get(i), obstacles.get(j));
             }
         }
     }

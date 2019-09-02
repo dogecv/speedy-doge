@@ -14,6 +14,6 @@ public class TestField extends VectorField {
         super(new ArrayList<>(), new ArrayList<>());
         FieldWall wall= new FieldWall();
 
-        //obsticals.add(new VectorRectangle(new Pose(), 50, 50, 24,1/2));
+        //obstacles.add(new VectorRectangle(new Pose(), 50, 50, 24,1/2));
     }
 }

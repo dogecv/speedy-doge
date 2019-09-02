@@ -3,13 +3,12 @@ package VF.Objects;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalConstants;
-import Universal.UniversalFunctions;
-import VF.Boundry;
+import VF.Boundary;
 /**
- * Generates an obstical which prevents vector fields from pushing past the field wall
+ * Generates an obstacle which prevents vector fields from pushing past the field wall
  * Field: All
  **/
-public class FieldWall implements Boundry {
+public class FieldWall implements Boundary {
     private boolean isActive;
 
     public Vector2 interact(Pose point, Vector2 vector) {
