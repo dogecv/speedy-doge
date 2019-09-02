@@ -4,7 +4,6 @@ import Universal.Math.Geometry.Rectangle;
 import Universal.Math.Geometry.Shape;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
-import VF.Objects.Robot;
 import VF.PointField;
 /**
  * PointField whose location is determined by finding the shortest distance between the robot and a given Shape
@@ -32,7 +31,7 @@ public class VectorShape extends PointField {
 
     private void setLocation(Pose loc){
   	   location = loc;
-       location.x += shape.position.x;
-       location.y += shape.position.y;
+       location.x += shape.location.x;
+       location.y += shape.location.y;
     }
 }

@@ -7,7 +7,7 @@ import Universal.UniversalFunctions;
 import VF.Objects.Robot;
 
 /**
- * VectorFieldComponent that when interacted with, directs position away from location and towards target
+ * VectorFieldComponent that when interacted with, directs location away from location and towards target
  * TESTED
  */
 public class PointField extends VectorFieldComponent {
@@ -18,7 +18,7 @@ public class PointField extends VectorFieldComponent {
     public Vector2 interact(Pose position) {
         Robot robot = UniversalConstants.getRobot(position);
 
-        //zeroes the field at 0, 0, 0 and translates the position and destination to match
+        //zeroes the field at 0, 0, 0 and translates the location and destination to match
         Vector2 dest = getTarget().toVector().clone();
         dest.subtract(location.toVector());
         Vector2 point = new Vector2();
@@ -29,7 +29,7 @@ public class PointField extends VectorFieldComponent {
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
         Vector2 closestRobotPoint = robot.getClosestPoint(position.toVector());
-        closestRobotPoint.subtract(robot.position.toVector());
+        closestRobotPoint.subtract(robot.location.toVector());
         double strength = getStrength(output.magnitude() - closestRobotPoint.magnitude());
 
 

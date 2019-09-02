@@ -20,20 +20,28 @@ public class VectorField {
         calculateBarriers();
         destination = new Waypoint(new Pose());
     }
+
+    /*
+    returns the field's vector at the given point
+     */
     public Vector2 getVector (Pose point) {
 
         Vector2 output = new Vector2();
 
+        //adds all barrier vectors to output
         for(VectorRectangle barrier : barriers){
             output.add(barrier.interact(point));
         }
 
+        //adds all obstacle vectors to output
         for (VectorFieldComponent obstacle : obstacles) {
             output.add(obstacle.interact(point));
         }
 
+        //adds the destination vector to output
         output.add(destination.interact(point));
 
+        //modifies output to ensure that it satisfies the conditions of each Boundary
         for(Boundary boundary : boundaries) {
             output = boundary.interact(point, output);
         }
@@ -41,6 +49,9 @@ public class VectorField {
 
     }
 
+    /*
+    updates the position of the destination
+     */
     public void setWaypoint(Pose location) {
         for(int i = 0; i < obstacles.size(); i++){
             obstacles.get(i).setTarget(location);
@@ -48,7 +59,12 @@ public class VectorField {
         destination.location = location;
     }
 
-    //stepSize < thresholdForDestination
+    /*
+    Generates a pure pursuit path using the VectorField
+
+    stepSize < thresholdForDestination
+     */
+    //TODO: remove debugging methods and add comments
     public Path generatePath(Pose pose, double stepSize, double thresholdForDestination) {
         Vector2 temp = new Vector2(destination.location.x, destination.location.y);
         temp.subtract(pose.toVector());
@@ -75,7 +91,7 @@ public class VectorField {
         return output;
 
     }
-//TODO: calculate boundary conditions after the center path is generated
+//TODO: calculate boundary conditions after the center path is generated or remove method
     public Path generateCenterPath(Pose pose, double stepSize, double thresholdForDestination){
         Pose leftSide = new Pose(0, 9, 0), rightSide = new Pose(0, -9, 0);
         leftSide.rotate(pose.angle);
@@ -101,6 +117,9 @@ public class VectorField {
         return outputPath;
     }
 
+    /*
+    creates obstacles between all objects that the robot cannot pass through
+     */
     public void calculateBarriers(VectorFieldComponent field1, VectorFieldComponent field2){
         double distance = Math.hypot(field1.location.y - field2.location.y, field1.location.x - field2.location.x);
         //TODO: add MINIMUM_APPROACH_DISTANCE to UniversalConstants or Robot class

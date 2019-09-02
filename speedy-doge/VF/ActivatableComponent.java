@@ -5,7 +5,18 @@ package VF;
  */
 public interface ActivatableComponent {
 
+    /*
+    activates the component
+     */
     void activate();
+
+    /*
+    deactivates the component
+     */
     void deactivate();
+
+    /*
+    returns true if the component is active, false if it is inactive
+     */
     boolean isActive();
 }

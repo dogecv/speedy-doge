@@ -32,7 +32,7 @@ public abstract class VectorFieldComponent implements ActivatableComponent {
         return strength / d * Math.pow(Math.E, falloff * (strength - d));
     }
     /*
-    generates a vector that points position in a desired direction
+    generates a vector that points location in a desired direction
      */
     public abstract Vector2 interact(Pose position);
     /*
@@ -41,7 +41,6 @@ public abstract class VectorFieldComponent implements ActivatableComponent {
     public void setTarget(Pose point) {
         target = point;
         location.angle = Math.atan2(point.y - location.y, point.x - location.x);
-        System.out.println(target);
     }
 
     /*

@@ -6,8 +6,9 @@ import Universal.UniversalFunctions;
 
 /**
  * A Waypoint creates a VectorFieldComponent at the destination: either an AttractionField or a Solanoid
- * TESTED
  */
+
+//TODO: remove AttractionField and add comments
 public class Waypoint {
     //destination location
     public Pose location;
@@ -58,7 +59,7 @@ public class Waypoint {
         directionalField.deactivate();
     }
     /*
-    generates an output vector to draw position towards location (at a specific angle, if specifiedDirection is true)
+    generates an output vector to draw location towards location (at a specific angle, if specifiedDirection is true)
      */
     public Vector2 interact(Pose position) {
         Vector2 output = directionalField.interact(position);
@@ -112,7 +113,7 @@ public class Waypoint {
         public Vector2 interact (Pose position) {
             //if the field is currently active...
             if(super.isActive()) {
-                //zeroes the field at 0, 0, 0 and translates the position to match
+                //zeroes the field at 0, 0, 0 and translates the location to match
                 Vector2 output = new Vector2();
                 output.x = position.x - location.x;
                 output.y = position.y - location.y;

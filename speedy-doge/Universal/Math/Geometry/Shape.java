@@ -1,13 +1,17 @@
 package Universal.Math.Geometry;
 
-import FRC_Pure_Pursuit.Tank.Vector;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 
+/**
+ * Superclass for any geometric object
+ */
 public abstract class Shape {
-    public Pose position = new Pose();
+    public Pose location = new Pose();
 
+    /*
+    returns the point on perimeter of the Shape closest to the input point
+     */
     public abstract Vector2 getClosestPoint(Vector2 point);
 
-    public abstract Vector2 getClosestVector(Vector2 point);
 }
