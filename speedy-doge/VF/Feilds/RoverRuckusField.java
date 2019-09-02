@@ -65,6 +65,7 @@ public class RoverRuckusField extends VectorField {
         SilverSample rightSampleq4 = new SilverSample(new Pose(25,-47,0));
 
         obsticals.add(lander);
+
         obsticals.add(crater1);
         obsticals.add(crater2);
 

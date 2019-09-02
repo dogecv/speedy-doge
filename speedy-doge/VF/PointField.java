@@ -16,7 +16,8 @@ public class PointField extends VectorFieldComponent {
     }
 
     public Vector2 interact(Pose position) {
-        //Robot robot = UniversalConstants.getRobot(position);
+        Robot robot = UniversalConstants.getRobot(position);
+
         //zeroes the field at 0, 0, 0 and translates the position and destination to match
         Vector2 dest = getTarget().toVector().clone();
         dest.subtract(location.toVector());
@@ -27,7 +28,9 @@ public class PointField extends VectorFieldComponent {
 
         //creates output vector and sets its magnitude
         Vector2 output = new Vector2(point.x, point.y);
-        double strength = getStrength(output.magnitude()/* - robot.getClosestPoint(position).magnitude()*/);
+        Vector2 closestRobotPoint = robot.getClosestPoint(position.toVector());
+        closestRobotPoint.subtract(robot.position.toVector());
+        double strength = getStrength(output.magnitude() - closestRobotPoint.magnitude());
 
 
         //if the obstacle is in the way...

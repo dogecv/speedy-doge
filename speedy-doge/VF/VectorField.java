@@ -24,21 +24,7 @@ public class VectorField {
         calculateBarriers();
         destination = new Waypoint(new Pose());
     }
-    public Vector2 getVector (Pose initialPose) {
-
-        Pose point = initialPose;
-        Robot robot = UniversalConstants.getRobot(initialPose);
-        double maxDistance = 0;
-        for(VectorFieldComponent obstical : obsticals) {
-            obstical.interact(initialPose);
-            Vector2 closestPoint = robot.getClosestPoint(obstical.location);
-            double distance = Math.hypot(obstical.location.x-closestPoint.x, obstical.location.y-closestPoint.y);
-            if(distance > maxDistance){
-                maxDistance = distance;
-                point = initialPose;
-                point.add(robot.getClosestVector(obstical.location.toVector()));
-            }
-        }
+    public Vector2 getVector (Pose point) {
 
         Vector2 output = new Vector2();
 
@@ -56,6 +42,7 @@ public class VectorField {
             output = boundry.interact(point, output);
         }
         return output;
+
     }
 
     public void setWaypoint(Pose location) {
