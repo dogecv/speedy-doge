@@ -44,7 +44,7 @@ public class RoverRuckusField extends VectorField {
         super(new ArrayList<>(), new ArrayList<>());
         FieldWall wall= new FieldWall();
 
-        Lander lander = new Lander(new Pose(0, 0, Math.PI/4));
+        Lander lander = new Lander(new Pose(0, 0, 0));
 
         Crater crater1 = new Crater(new Pose(-72, 72, 0));
         Crater crater2 = new Crater(new Pose(72, -72, 0));

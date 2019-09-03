@@ -26,7 +26,7 @@ public class VectorField {
     }
     public Vector2 getVector (Pose point) {
 
-        Vector2 output = new Vector2();
+        Vector2 output = destination.interact(point);
 
         for(VectorRectangle barrier : barriers){
             output.add(barrier.interact(point));
@@ -35,8 +35,6 @@ public class VectorField {
         for (VectorFieldComponent obstical : obsticals) {
             output.add(obstical.interact(point));
         }
-
-        output.add(destination.interact(point));
 
         for(Boundry boundry : boundries) {
             output = boundry.interact(point, output);
@@ -49,7 +47,7 @@ public class VectorField {
         for(int i = 0; i < obsticals.size(); i++){
             obsticals.get(i).setTarget(location);
         }
-        destination.location = location;
+        destination.updateLocation(location);
     }
 
     //stepSize < thresholdForDestination
@@ -61,7 +59,7 @@ public class VectorField {
         String st = "";
         double min = temp.magnitude();
         int counter = 0;
-        while(temp.magnitude() > thresholdForDestination && counter < 100) {
+        while(temp.magnitude() > thresholdForDestination && counter < 500) {
             counter ++;
             temp2 = getVector(pose);
             temp2.setFromPolar(stepSize, temp2.angle());
@@ -71,8 +69,6 @@ public class VectorField {
             st+= pose.toVector().toString() + ", ";
 
             temp = new Vector2(destination.location.x, destination.location.y);
-            temp.subtract(pose.toVector());
-            min = Math.min(temp.magnitude(), min);
         }
 
         System.out.println(st);

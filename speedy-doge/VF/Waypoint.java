@@ -66,6 +66,12 @@ public class Waypoint {
         return output;
     }
 
+    public void updateLocation(Pose location){
+        directionalField.location = location;
+        nonDirectionalField.location = location;
+        this.location = location;
+    }
+
     /**
      * VectorFieldComponent with output vectors that all point towards location
      */
@@ -85,7 +91,6 @@ public class Waypoint {
             output.setFromPolar(-1, output.angle());
 
             //TODO:
-            output = new Vector2();
             return output;
         }
       

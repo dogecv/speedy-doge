@@ -10,7 +10,7 @@ import VF.Boundry;
  * Field: All
  **/
 public class FieldWall implements Boundry {
-    private boolean isActive;
+    private boolean isActive = true;
 
     public Vector2 interact(Pose point, Vector2 vector) {
         Robot robot = UniversalConstants.getRobot(point);

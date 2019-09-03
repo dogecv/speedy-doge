@@ -30,58 +30,30 @@ public class Rectangle extends Shape {
         pose.rotate(-position.angle);
 
         Vector2 outputVect = new Vector2();
-        if(pose.y > 0){
-            if(pose.x > 0){
-                pose.x -= width / 2;
-                pose.y -= height/2;
+
+        if(pose.y > height/2){
+            if(pose.x > width/2 )
                 outputVect = new Vector2(width/2, height/2);
-                if (pose.y < 0)
-                    outputVect.y -= pose.y;
-                else if (pose.x < 0)
-                    outputVect.x -= pose.x;
-
-                pose.x += width / 2;
-                pose.y += height/2;
-            }
-            else{
-                pose.x += width / 2;
-                pose.y -= height/2;
-                outputVect = new Vector2(-width/2, height/2);
-                if (pose.y < 0)
-                    outputVect.y -= pose.y;
-                else if (pose.x > 0)
-                    outputVect.x += pose.x;
-
-                pose.x -= width / 2;
-                pose.y += height/2;
-            }
+            else if (pose.x < -width/2)
+                outputVect = new Vector2(-width/2, height /2);
+            else
+                outputVect = new Vector2(pose.x, height/2);
         }
-        else {
-            if(pose.x > 0){
-                pose.x -= width / 2;
-                pose.y += height/2;
+        else if(pose.y < -height/2){
+            if(pose.x > width/2 )
                 outputVect = new Vector2(width/2, -height/2);
-                if (pose.y > 0)
-                    outputVect.y += pose.y;
-                else if (pose.x < 0)
-                    outputVect.x -= pose.x;
-
-                pose.x += width / 2;
-                pose.y -= height/2;
-            }
-            else{
-                pose.x += width / 2;
-                pose.y += height/2;
-                outputVect = new Vector2(-width/2, -height/2);
-                if (pose.y > 0)
-                    outputVect.y += pose.y;
-                else if (pose.x > 0)
-                    outputVect.x += pose.x;
-
-                pose.x -= width / 2;
-                pose.y -= height/2;
-            }
+            else if (pose.x < -width/2)
+                outputVect = new Vector2(-width/2, -height /2);
+            else
+                outputVect = new Vector2(pose.x, -height/2);
         }
+        else{
+            if(pose.x > width/2)
+                outputVect = new Vector2(width/2, pose.y);
+            else if(pose.x < -width/2)
+                outputVect = new Vector2(-width/2, pose.y);
+        }
+
         outputVect.rotate(position.angle);
         outputVect.x += position.x;
         outputVect.y += position.y;

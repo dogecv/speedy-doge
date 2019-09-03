@@ -15,15 +15,15 @@ public class Lander extends VectorFieldComponent {
     public Lander(Pose location, double strength, double falloff){
         super(location, strength, falloff);
         //landerBody represents the Lander's cargo holds
-        landerBody = new VectorRectangle(location, 23.3, 23.3, strength, falloff);
+        landerBody = new VectorRectangle(new Pose(location.x, location.y, Math.PI/4), 23.3, 23.3, strength, falloff);
         //landerLeg1 represents the top right and bottom left lander legs
-        landerLeg1 = new VectorRectangle(new Pose(location.x, location.y, location.angle + Math.PI / 4), 63, 1, strength, falloff);
+        landerLeg1 = new VectorRectangle(location, 63, 1, strength, falloff);
         //landerLeg2 represents the top left and bottom right lander legs
-        landerLeg2 = new VectorRectangle(new Pose(location.x, location.y, location.angle - Math.PI / 4), 63, 1, strength, falloff);
+        landerLeg2 = new VectorRectangle(location, 1, 63, strength, falloff);
     }
 
     public Lander(Pose location){
-        this(location, 24, 0.0);
+        this(location, 24, 1/2);
     }
 
     public Vector2 interact(Pose pose){
@@ -31,13 +31,20 @@ public class Lander extends VectorFieldComponent {
         Vector2 leg1Vect = landerLeg1.interact(pose);
         Vector2 leg2Vect = landerLeg2.interact(pose);
 
-        if(bodyVect.magnitude() > Math.max(leg1Vect.magnitude(), leg2Vect.magnitude())){
+        if(bodyVect.magnitude() >= Math.max(leg1Vect.magnitude(), leg2Vect.magnitude())){
+            System.out.println("body");
             return bodyVect;
         }
-        else if(leg1Vect.magnitude() > Math.max(leg2Vect.magnitude(), bodyVect.magnitude())){
+        else if(leg1Vect.magnitude() >= Math.max(leg2Vect.magnitude(), bodyVect.magnitude())){
+            System.out.println("leg1");
             return leg1Vect;
         }
-        return leg2Vect;
+        else if(leg2Vect.magnitude() >= Math.max(leg1Vect.magnitude(), bodyVect.magnitude())) {
+            System.out.println("leg2");
+            return leg2Vect;
+        }
+        System.out.println("rip");
+        return new Vector2();
     }
 
 

@@ -20,19 +20,19 @@ public class VectorShape extends PointField {
         super(location, strength, falloff);
     }
 
+
+
     /*
     places the PointField at the location on shape that is closest to pose, then creates the corresponding output vector
      */
     @Override
     public Vector2 interact(Pose pose){
         Vector2 vectorLocation = shape.getClosestPoint(pose.toVector());
-        setLocation(new Pose(vectorLocation.x, vectorLocation.y, location.angle));
+        setLocation(new Pose(vectorLocation.x, vectorLocation.y));
         return super.interact(pose);
     }
 
-    private void setLocation(Pose loc){
+    public void setLocation(Pose loc){
   	   location = loc;
-       location.x += shape.position.x;
-       location.y += shape.position.y;
     }
 }
