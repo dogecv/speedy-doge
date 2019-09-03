@@ -19,6 +19,7 @@ class MPC_Pathfinder(start : Pose, end : Pose, obstacles : ArrayList<Pose>) {
 
     val Q = 1 //position error
     val R = 0.01 //acceleration error
+    val r2 = 0.01 //overall control effort penalizer
     val O = 0.01 //obstacle error
 
     val EPSILON = 0.001
@@ -84,8 +85,8 @@ class MPC_Pathfinder(start : Pose, end : Pose, obstacles : ArrayList<Pose>) {
     private fun solveThetaCostGradient(vector : Vector2, base : Vector2, cost : Double) : Double{
         val gradient_vector_1 = Vector2(vector.magnitude() * cos(vector.angle() + Math.toRadians(10.0)), vector.magnitude() * sin(vector.angle() + Math.toRadians(10.0)))
         val gradient_vector_2 = Vector2(vector.magnitude() * cos(vector.angle() - Math.toRadians(10.0)), vector.magnitude() * sin(vector.angle() - Math.toRadians(10.0)))
-        val gradient_vector_cost_1 = (Q * gradient_vector_1.compound(base).distanceToVector(end.toVector())) + (R * gradient_vector_1.distanceToVector(previous)) + (O * distanceToAllObstacles(gradient_vector_1.compound(base)))
-        val gradient_vector_cost_2 = (Q * gradient_vector_2.compound(base).distanceToVector(end.toVector())) + (R * gradient_vector_2.distanceToVector(previous)) + (O * distanceToAllObstacles(gradient_vector_2.compound(base)))
+        val gradient_vector_cost_1 = (Q * gradient_vector_1.compound(base).distanceToVector(end.toVector()).pow(2)) + (R * gradient_vector_1.distanceToVector(previous).pow(2)) + (O * distanceToAllObstacles(gradient_vector_1.compound(base)).pow(2)) + (r2 * gradient_vector_1.magnitude().pow(2))
+        val gradient_vector_cost_2 = (Q * gradient_vector_2.compound(base).distanceToVector(end.toVector()).pow(2)) + (R * gradient_vector_2.distanceToVector(previous).pow(2)) + (O * distanceToAllObstacles(gradient_vector_2.compound(base)).pow(2)) + (r2 * gradient_vector_2.magnitude().pow(2))
         val gradient_cost = ((gradient_vector_cost_2 - cost) - (gradient_vector_cost_1 - cost)) //gradient at point in rTheta state space
         val step = (THETA_GAIN * gradient_cost) + (STOCHASTIC_SCALE * Random.nextDouble())
         return step
@@ -94,8 +95,8 @@ class MPC_Pathfinder(start : Pose, end : Pose, obstacles : ArrayList<Pose>) {
     private fun solveVeloCostGradient(vector : Vector2, base : Vector2, cost : Double) : Double{
         val velo_gradient_vector_1 = Vector2((vector.magnitude() + 1) * cos(vector.angle()), (vector.magnitude() + 1) * sin(vector.angle()))
         val velo_gradient_vector_2 = Vector2((vector.magnitude() - 1) * cos(vector.angle()), (vector.magnitude() - 1) * sin(vector.angle()))
-        val velo_gradient_vector_cost_1 = (Q * velo_gradient_vector_1.compound(base).distanceToVector(end.toVector())) + (R * velo_gradient_vector_1.distanceToVector(previous)) + (O * distanceToAllObstacles(velo_gradient_vector_1.compound(base)))
-        val velo_gradient_vector_cost_2 = (Q * velo_gradient_vector_2.compound(base).distanceToVector(end.toVector())) + (R * velo_gradient_vector_2.distanceToVector(previous)) + (O * distanceToAllObstacles(velo_gradient_vector_2.compound(base)))
+        val velo_gradient_vector_cost_1 = (Q * velo_gradient_vector_1.compound(base).distanceToVector(end.toVector()).pow(2)) + (R * velo_gradient_vector_1.distanceToVector(previous).pow(2)) + (O * distanceToAllObstacles(velo_gradient_vector_1.compound(base)).pow(2)) + (r2 * velo_gradient_vector_1.magnitude().pow(2))
+        val velo_gradient_vector_cost_2 = (Q * velo_gradient_vector_2.compound(base).distanceToVector(end.toVector()).pow(2)) + (R * velo_gradient_vector_2.distanceToVector(previous).pow(2)) + (O * distanceToAllObstacles(velo_gradient_vector_2.compound(base)).pow(2)) + (r2 * velo_gradient_vector_2.magnitude().pow(2))
         val velo_gradient_cost = ((velo_gradient_vector_cost_2 - cost) - (velo_gradient_vector_cost_1 - cost)) //compute velo gradient at point in rTheta state space
         val velo_step = (VELO_GAIN * velo_gradient_cost) + (STOCHASTIC_SCALE * Random.nextDouble())
         return velo_step
@@ -113,6 +114,7 @@ class MPC_Pathfinder(start : Pose, end : Pose, obstacles : ArrayList<Pose>) {
                 for (j in 0 until i){
                     val addition = optimal_control_sequence[j]
                     addition.scalarMultiply(TIMESTEP)
+                    cost += (R * addition.distanceToVector(base).pow(2)) + (r2 * addition.magnitude().pow(2))
                     base.add(addition)
                     cost += getCost(addition)
                 }
@@ -180,7 +182,7 @@ class MPC_Pathfinder(start : Pose, end : Pose, obstacles : ArrayList<Pose>) {
     }
 
     fun getCost(pos : Vector2) : Double{
-        return (Q * pos.distanceToVector(end.toVector())) + (O * distanceToAllObstacles(pos))
+        return (Q * pos.distanceToVector(end.toVector()).pow(2)) + (O * distanceToAllObstacles(pos).pow(2))
     }
 
     fun getConfidence(pos : Pose) : Double{
@@ -189,7 +191,7 @@ class MPC_Pathfinder(start : Pose, end : Pose, obstacles : ArrayList<Pose>) {
         for (action in optimal_control_sequence){
             action.scalarMultiply(TIMESTEP)
             curr_pos.add(action)
-            cost += getCost(curr_pos) + (R * previous.distanceToVector(action))
+            cost += getCost(curr_pos) + (R * previous.distanceToVector(action).pow(2)) + (r2 * action.magnitude().pow(2))
         }
         return cost
     }
