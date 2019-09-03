@@ -2,15 +2,12 @@ package VF.Feilds;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
-import VF.Boundry;
 import VF.Objects.FieldWall;
 import VF.Objects.RoverRuckus.Crater;
 import VF.Objects.RoverRuckus.Lander;
 import VF.Objects.RoverRuckus.SilverSample;
 import VF.VectorField;
-import VF.VectorFieldComponent;
 
-import javax.swing.text.Position;
 import java.util.ArrayList;
 
 public class RoverRuckusField extends VectorField {
@@ -64,48 +61,48 @@ public class RoverRuckusField extends VectorField {
         SilverSample rightSampleq3 = new SilverSample(new Pose(-47,-25,0));
         SilverSample rightSampleq4 = new SilverSample(new Pose(25,-47,0));
 
-        obsticals.add(lander);
+        obstacles.add(lander);
 
-        obsticals.add(crater1);
-        obsticals.add(crater2);
+        obstacles.add(crater1);
+        obstacles.add(crater2);
 
-        obsticals.add(centerSampleq1);
-        obsticals.add(centerSampleq2);
-        obsticals.add(centerSampleq3);
-        obsticals.add(centerSampleq4);
+        obstacles.add(centerSampleq1);
+        obstacles.add(centerSampleq2);
+        obstacles.add(centerSampleq3);
+        obstacles.add(centerSampleq4);
 
-        obsticals.add(leftSampleq1);
-        obsticals.add(leftSampleq2);
-        obsticals.add(leftSampleq3);
-        obsticals.add(leftSampleq4);
+        obstacles.add(leftSampleq1);
+        obstacles.add(leftSampleq2);
+        obstacles.add(leftSampleq3);
+        obstacles.add(leftSampleq4);
 
-        obsticals.add(rightSampleq1);
-        obsticals.add(rightSampleq2);
-        obsticals.add(rightSampleq3);
-        obsticals.add(rightSampleq4);
+        obstacles.add(rightSampleq1);
+        obstacles.add(rightSampleq2);
+        obstacles.add(rightSampleq3);
+        obstacles.add(rightSampleq4);
 
 
-        boundries.add(wall);
+        boundaries.add(wall);
 
     }
 
     public void sampleLeft(){
         sample  = Sample.LEFT;
 
-        obsticals.get(LEFT_SAMPLE_Q1_INDEX).deactivate();
-        obsticals.get(LEFT_SAMPLE_Q2_INDEX).deactivate();
-        obsticals.get(LEFT_SAMPLE_Q3_INDEX).deactivate();
-        obsticals.get(LEFT_SAMPLE_Q4_INDEX).deactivate();
+        obstacles.get(LEFT_SAMPLE_Q1_INDEX).deactivate();
+        obstacles.get(LEFT_SAMPLE_Q2_INDEX).deactivate();
+        obstacles.get(LEFT_SAMPLE_Q3_INDEX).deactivate();
+        obstacles.get(LEFT_SAMPLE_Q4_INDEX).deactivate();
 
-        obsticals.get(CENTER_SAMPLE_Q1_INDEX).activate();
-        obsticals.get(CENTER_SAMPLE_Q2_INDEX).activate();
-        obsticals.get(CENTER_SAMPLE_Q3_INDEX).activate();
-        obsticals.get(CENTER_SAMPLE_Q4_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q1_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q2_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q3_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q4_INDEX).activate();
 
-        obsticals.get(RIGHT_SAMPLE_Q1_INDEX).activate();
-        obsticals.get(RIGHT_SAMPLE_Q2_INDEX).activate();
-        obsticals.get(RIGHT_SAMPLE_Q3_INDEX).activate();
-        obsticals.get(RIGHT_SAMPLE_Q4_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q1_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q2_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q3_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q4_INDEX).activate();
 
         hasChangedBarriers = true;
     }
@@ -113,20 +110,20 @@ public class RoverRuckusField extends VectorField {
     public void sampleCenter(){
         sample  = Sample.CENTER;
 
-        obsticals.get(LEFT_SAMPLE_Q1_INDEX).activate();
-        obsticals.get(LEFT_SAMPLE_Q2_INDEX).activate();
-        obsticals.get(LEFT_SAMPLE_Q3_INDEX).activate();
-        obsticals.get(LEFT_SAMPLE_Q4_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q1_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q2_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q3_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q4_INDEX).activate();
 
-        obsticals.get(CENTER_SAMPLE_Q1_INDEX).deactivate();
-        obsticals.get(CENTER_SAMPLE_Q2_INDEX).deactivate();
-        obsticals.get(CENTER_SAMPLE_Q3_INDEX).deactivate();
-        obsticals.get(CENTER_SAMPLE_Q4_INDEX).deactivate();
+        obstacles.get(CENTER_SAMPLE_Q1_INDEX).deactivate();
+        obstacles.get(CENTER_SAMPLE_Q2_INDEX).deactivate();
+        obstacles.get(CENTER_SAMPLE_Q3_INDEX).deactivate();
+        obstacles.get(CENTER_SAMPLE_Q4_INDEX).deactivate();
 
-        obsticals.get(RIGHT_SAMPLE_Q1_INDEX).activate();
-        obsticals.get(RIGHT_SAMPLE_Q2_INDEX).activate();
-        obsticals.get(RIGHT_SAMPLE_Q3_INDEX).activate();
-        obsticals.get(RIGHT_SAMPLE_Q4_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q1_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q2_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q3_INDEX).activate();
+        obstacles.get(RIGHT_SAMPLE_Q4_INDEX).activate();
 
         hasChangedBarriers = true;
     }
@@ -134,20 +131,20 @@ public class RoverRuckusField extends VectorField {
     public void sampleRight(){
         sample  = Sample.RIGHT;
 
-        obsticals.get(LEFT_SAMPLE_Q1_INDEX).activate();
-        obsticals.get(LEFT_SAMPLE_Q2_INDEX).activate();
-        obsticals.get(LEFT_SAMPLE_Q3_INDEX).activate();
-        obsticals.get(LEFT_SAMPLE_Q4_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q1_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q2_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q3_INDEX).activate();
+        obstacles.get(LEFT_SAMPLE_Q4_INDEX).activate();
 
-        obsticals.get(CENTER_SAMPLE_Q1_INDEX).activate();
-        obsticals.get(CENTER_SAMPLE_Q2_INDEX).activate();
-        obsticals.get(CENTER_SAMPLE_Q3_INDEX).activate();
-        obsticals.get(CENTER_SAMPLE_Q4_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q1_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q2_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q3_INDEX).activate();
+        obstacles.get(CENTER_SAMPLE_Q4_INDEX).activate();
 
-        obsticals.get(RIGHT_SAMPLE_Q1_INDEX).deactivate();
-        obsticals.get(RIGHT_SAMPLE_Q2_INDEX).deactivate();
-        obsticals.get(RIGHT_SAMPLE_Q3_INDEX).deactivate();
-        obsticals.get(RIGHT_SAMPLE_Q4_INDEX).deactivate();
+        obstacles.get(RIGHT_SAMPLE_Q1_INDEX).deactivate();
+        obstacles.get(RIGHT_SAMPLE_Q2_INDEX).deactivate();
+        obstacles.get(RIGHT_SAMPLE_Q3_INDEX).deactivate();
+        obstacles.get(RIGHT_SAMPLE_Q4_INDEX).deactivate();
 
         hasChangedBarriers = true;
     }

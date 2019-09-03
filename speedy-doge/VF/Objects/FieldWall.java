@@ -3,24 +3,17 @@ package VF.Objects;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalConstants;
-import Universal.UniversalFunctions;
-import VF.Boundry;
+import VF.Boundary;
 /**
- * Generates an obstical which prevents vector fields from pushing past the field wall
- * Field: All
+ * Generates an obstacle which prevents vector fields from pushing past the field wall
  **/
-public class FieldWall implements Boundry {
-    private boolean isActive = true;
+public class FieldWall implements Boundary {
+    private boolean isActive;
 
     public Vector2 interact(Pose point, Vector2 vector) {
         Robot robot = UniversalConstants.getRobot(point);
         if (isActive) {
-            double effectiveRadius = 0;
-
-            if(Math.abs(Math.tan(point.toVector().angle())) > 1)
-                effectiveRadius = robot.polarVector(Math.PI / 2 - point.angle).magnitude();
-            else
-                effectiveRadius = robot.polarVector(-point.angle).magnitude();
+            double effectiveRadius = 9;
 
             if (point.x > 72 - effectiveRadius && vector.x > 0)
                 vector.x = 0;

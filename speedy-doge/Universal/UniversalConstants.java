@@ -2,20 +2,20 @@ package Universal;
 
 import Universal.Math.Pose;
 import VF.Objects.*;
-import VF.Boundry;
-import VF.Objects.RoverRuckus.Crater;
-import VF.Objects.RoverRuckus.Lander;
-import VF.Objects.RoverRuckus.SilverSample;
-import VF.VectorField;
-import VF.VectorFieldComponent;
 
-import java.util.ArrayList;
-
+/**
+ * Contains miscellaneous constants
+ */
 public class UniversalConstants {
 
-    //how big we treat the robot when avoiding obsticals
+    /*
+    how big we treat the robot when avoiding obstacles
+     */
     public static final double EFFECTIVE_ROBOT_RADIUS = 9 * Math.sqrt(2) + 2;
 
+    /*
+    Used to initialize a robot object, modify this function to return a robot of different shapes using the Robot.add() method
+    */
     public static Robot getRobot(Pose location){
         return new Robot(location);
     }

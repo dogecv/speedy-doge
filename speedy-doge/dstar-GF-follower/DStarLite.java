@@ -340,7 +340,7 @@ public class DStarLite implements java.io.Serializable{
 
 
 	/*
-	 * Update the position of the agent/robot.
+	 * Update the location of the agent/robot.
 	 * This does not force a replan.
 	 */
 	public void updateStart(int x, int y)
@@ -356,7 +356,7 @@ public class DStarLite implements java.io.Serializable{
 	}
 
 	/*
-	 * This is somewhat of a hack, to change the position of the goal we
+	 * This is somewhat of a hack, to change the location of the goal we
 	 * first save all of the non-empty nodes on the map, clear the map, move the
 	 * goal and add re-add all of the non-empty cells. Since most of these cells
 	 * are not between the start and goal this does not seem to hurt performance

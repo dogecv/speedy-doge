@@ -6,7 +6,7 @@ import Universal.Math.Vector2;
 import Universal.UniversalFunctions;
 
 /**
-* TESTED
+* Used to represent rectangular objects
 */
 
 public class Rectangle extends Shape {
@@ -21,13 +21,15 @@ public class Rectangle extends Shape {
     public Rectangle (Pose location, double width, double height){
         this.width = width;
         this.height = height;
-        this.position = location;
+        this.location = location;
     }
 
     public Vector2 getClosestPoint (Vector2 pose) {
-        pose.x -= position.x;
-        pose.y -= position.y;
-        pose.rotate(-position.angle);
+
+        //normalizes pose relative to the center of the Rectangle
+        pose.x -= location.x;
+        pose.y -= location.y;
+        pose.rotate(-location.angle);
 
         Vector2 outputVect = new Vector2();
 
@@ -54,33 +56,39 @@ public class Rectangle extends Shape {
                 outputVect = new Vector2(-width/2, pose.y);
         }
 
-        outputVect.rotate(position.angle);
-        outputVect.x += position.x;
-        outputVect.y += position.y;
+        //renormalizes outputVect to the original location of the Rectangle
+        outputVect.rotate(location.angle);
+        outputVect.x += location.x;
+        outputVect.y += location.y;
         return outputVect;
     }
-
-    public Vector2 getClosestVector(Vector2 pose) {
-        Vector2 temp = position.toVector();
-        temp.subtract(pose);
-        return polarVector(temp.angle());
-    }
+    /*
+    returns a vector originating from the center of the Rectangle at a given angle that lies on the Rectangle
+     */
     public Vector2 polarVector (double angle) {
-        angle -= position.angle;
-        Vector2 output = new Vector2();
+
+        //reorients and normalizes angle relative to location.angle
+        angle -= location.angle;
+        Vector2 output;
         angle = UniversalFunctions.normalizeAngleRadians(angle);
+
+        //if the angle points to the top part of the right edge...
         if (angle < Math.atan2(height, width))
             output = new Vector2(width / 2, Math.tan(angle) * width / 2);
 
+        //if the angle points to the top edge...
         else if (angle < Math.PI / 2 + Math.atan2(width, height))
             output = new Vector2(-Math.tan(angle - Math.PI / 2) * height / 2, height / 2);
 
+        //if the angle points to the left edge...
         else if (angle < Math.PI + Math.atan2(height, width))
             output = new Vector2(-width / 2, -Math.tan(angle - Math.PI) * width / 2);
 
+        //if the angle points to the bottom edge...
         else if (angle < Math.PI * 3 / 2 + Math.atan2(width, height))
             output = new Vector2(Math.tan(angle - Math.PI / 2) * height / 2, height / 2);
 
+        //if the angle points to the bottom part of the right edge...
         else
             output = new Vector2(width / 2, Math.tan(angle) * width / 2);
 

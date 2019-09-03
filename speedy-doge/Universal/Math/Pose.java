@@ -1,7 +1,10 @@
 package Universal.Math;
 
-public class Pose {
-    public double x, y, angle;
+/**
+ * 2d vector with an additional angle
+ */
+public class Pose extends Vector2{
+    public double angle;
 
     public Pose(){
         x = 0;
@@ -19,33 +22,27 @@ public class Pose {
         this.y = y;
         this.angle = angle;
     }
-    public void add(Vector2 v){
-        x += v.x;
-        y += v.y;
-    }
+
     public void add(Pose p){
         x += p.x;
         y += p.y;
         angle += p.angle;
     }
+
+    /*
+    returns a Vector2 containing x and y only
+     */
     public Vector2 toVector(){
         return new Vector2(x, y);
     }
-    public double radius(){
-        return Math.hypot(x, y);
-    }
-    public double angleOfVector(){
-        return Math.atan2(y, x);
-    }
+
+    /*
+    returns a copy of this Pose
+     */
     public Pose clone(){
         return new Pose(x, y, angle);
     }
-    public void rotate(double angle){
-        Vector2 temp = new Vector2(x, y);
-        temp.rotate(angle);
-        x = temp.x;
-        y = temp.y;
-    }
+    @Override
     public String toString(){
         return x + ", " + y + ", " + angle;
     }

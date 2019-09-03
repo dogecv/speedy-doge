@@ -1,12 +1,9 @@
 package VF.Objects;
 
-import FRC_Pure_Pursuit.Tank.Vector;
 import Universal.Math.Geometry.Rectangle;
-import Universal.Math.Geometry.Shape;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 
-import java.util.ArrayList;
 /**
 * This class simplifies the robot's shape as an 18" square.
 * Location is updated in odometry classes.
@@ -28,7 +25,7 @@ public class Robot extends Rectangle {
     }*/
     @Override
     public Vector2 getClosestPoint(Vector2 point){
-        //refreshLocation(position);
+        //refreshLocation(location);
         //double workingDistance = getClosestVector(point).magnitude();
         Vector2 output = super.getClosestPoint(point);
         /*for(Shape shape : components){
@@ -42,19 +39,19 @@ public class Robot extends Rectangle {
     }
 
     public Vector2 getClosestPoint(Pose currentPose){
-        position = currentPose;
+        location = currentPose;
         return getClosestPoint(currentPose.toVector());
     }
 /*
     public void refreshLocation(Pose currentLocation){
         for (int i = 0; i < components.size(); i++){
-            components.get(i).position.x -= position.x;
-            components.get(i).position.y -= position.y;
-            components.get(i).position.angle -= position.angle;
-            components.get(i).position.rotate(-position.angle);
-            components.get(i).position.rotate(currentLocation.angle);
-            components.get(i).position.add(currentLocation.toVector());
+            components.get(i).location.x -= location.x;
+            components.get(i).location.y -= location.y;
+            components.get(i).location.angle -= location.angle;
+            components.get(i).location.rotate(-location.angle);
+            components.get(i).location.rotate(currentLocation.angle);
+            components.get(i).location.add(currentLocation.toVector());
         }
-        position = currentLocation;
+        location = currentLocation;
     }*/
 }
