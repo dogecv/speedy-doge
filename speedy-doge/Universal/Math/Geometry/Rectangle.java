@@ -62,6 +62,25 @@ public class Rectangle extends Shape {
         outputVect.y += location.y;
         return outputVect;
     }
+    public int getClosestSide (Vector2 pose) {
+        System.out.println("closestpose "+pose);
+        pose = pose.clone();
+        //normalizes pose relative to the center of the Rectangle
+        pose.x -= location.x;
+        pose.y -= location.y;
+        pose.rotate(-location.angle);
+        System.out.println("newclosestpose "+pose);
+
+        if(pose.y > height/2 && pose.x < width/2 && pose.x > -width/2)
+            return 2;
+        else if(pose.y < -height/2 && pose.x < width/2 && pose.x > -width/2)
+            return 4;
+        else if(pose.x > width/2 && pose.y > -height/2 && pose.y < height/2)
+                return 1;
+        else if(pose.x < -width/2 && pose.y > -height/2 && pose.y < height/2)
+            return 3;
+        return 0;
+    }
     /*
     returns a vector originating from the center of the Rectangle at a given angle that lies on the Rectangle
      */

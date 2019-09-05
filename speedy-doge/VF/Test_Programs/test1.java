@@ -26,11 +26,9 @@ public class test1 {
 
 
         TestField testField = new TestField();
-        testField.setWaypoint(new Pose(50,50));
+        testField.setWaypoint(new Pose(50,0));
         testField.destination.assignArbitraryDirection();
         System.out.println(testField.destination.location);
-        testField.generatePath(new Pose(-50,-50), 5, 9);
-        Rectangle rectangle= new Rectangle(new Pose(), 50,50);
-        System.out.println(rectangle.getClosestPoint(new Vector2(-50,0)));
+        testField.generatePath(new Pose(-50,0), 5, 9);
     }
 }

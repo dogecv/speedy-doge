@@ -19,6 +19,6 @@ public class TestField extends VectorField {
         FieldWall wall= new FieldWall();
         boundaries.add(wall);
         Rectangle rectangle = new Rectangle(new Pose(), 50, 50);
-        obstacles.add(new VectorRectangle(new Pose(), 24,  0.01, rectangle));
+        obstacles.add(new VectorRectangle(new Pose(), rectangle.width, rectangle.height, 24,  0.01));
     }
 }

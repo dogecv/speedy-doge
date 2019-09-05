@@ -75,6 +75,7 @@ public class VectorField {
             temp2.setFromPolar(stepSize, temp2.angle());
             pose.x += temp2.x;
             pose.y += temp2.y;
+            System.out.println(pose.toVector());
             output.wayPoint(pose.x, pose.y);
             st+= pose.toVector().toString() + ", ";
 
