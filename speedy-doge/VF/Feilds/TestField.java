@@ -5,6 +5,7 @@ import Universal.Math.Geometry.Shape;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import VF.Objects.FieldWall;
+import VF.Objects.RoverRuckus.SilverSample;
 import VF.PointField;
 import VF.VectorField;
 import VF.VectorShapes.VectorCircle;
@@ -18,7 +19,7 @@ public class TestField extends VectorField {
         super(new ArrayList<>(), new ArrayList<>());
         FieldWall wall= new FieldWall();
         boundaries.add(wall);
-        Rectangle rectangle = new Rectangle(new Pose(), 50, 50);
-        obstacles.add(new VectorRectangle(new Pose(), rectangle.width, rectangle.height, 24,  0.01));
+        Rectangle rectangle = new Rectangle(new Pose(), 23, 23);
+        obstacles.add(new VectorCircle(new Pose(-25, 0, 0), 2.75, 24, 0.01));
     }
 }

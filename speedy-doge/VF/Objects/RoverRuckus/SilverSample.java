@@ -10,7 +10,7 @@ import VF.VectorShapes.VectorCircle;
  **/
 public class SilverSample extends VectorCircle {
     public SilverSample(Pose location){
-        super(location, 2.75, 24/2, 1/2);
+        super(location, 2.75, 12/2, 0.05);
     }
     
     public SilverSample(Pose location, double strength, double falloff){

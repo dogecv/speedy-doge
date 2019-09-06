@@ -23,7 +23,7 @@ public class Lander extends VectorFieldComponent {
     }
 
     public Lander(Pose location){
-        this(location, 24, 1/2);
+        this(location, 12, 0.1);
     }
 
     public Vector2 interact(Pose pose){
@@ -44,7 +44,7 @@ public class Lander extends VectorFieldComponent {
             return leg2Vect;
         }
         System.out.println("rip");
-        return new Vector2();
+        return leg1Vect;
     }
 
 

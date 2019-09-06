@@ -114,7 +114,7 @@ public class VectorRectangle extends VectorShape {
         else {
 
             //shoot straight for the destination
-            output = new Vector2(dest.magnitude() - output.x, -output.y);
+            koutput = new Vector2(dest.magnitude() - output.x, -output.y);
             output.setFromPolar(strength, output.angle());
             output.rotate(dest.angle());
         }
