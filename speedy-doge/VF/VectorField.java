@@ -55,13 +55,11 @@ public class VectorField {
         destination.updateLocation(location);
     }
 
-//TODO: calculate boundary conditions after the center path is generated or remove method
     /*
     Generates a pure pursuit path using the VectorField
 
     stepSize < thresholdForDestination
      */
-//TODO: remove debugging methods and add comments
 public Path generatePath(Pose pose, double stepSize, double thresholdForDestination) {
     Vector2 temp = new Vector2(destination.location.x, destination.location.y);
     temp.subtract(pose.toVector());
@@ -136,7 +134,6 @@ public Path generatePath(Pose pose, double stepSize, double thresholdForDestinat
      */
     public void calculateBarriers(VectorFieldComponent field1, VectorFieldComponent field2){
         double distance = Math.hypot(field1.location.y - field2.location.y, field1.location.x - field2.location.x);
-        //TODO: add MINIMUM_APPROACH_DISTANCE to UniversalConstants or Robot class
         if(distance < UniversalConstants.MINIMUM_APPROACH_DISTANCE && field1.isActive() && field2.isActive()) {
             Vector2 intermediatePoint = new Vector2();
             double lineAngle = Math.atan2(field1.location.y - field2.location.y, field1.location.x - field2.location.x);
