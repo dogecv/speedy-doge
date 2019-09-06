@@ -1,17 +1,7 @@
 package VF.Test_Programs;
 
-import FRC_Pure_Pursuit.Tank.Vector;
-import Universal.Math.Geometry.Circle;
-import Universal.Math.Geometry.Ellipse;
-import Universal.Math.Geometry.Rectangle;
 import Universal.Math.Pose;
-import Universal.Math.Vector2;
-import Universal.UniversalConstants;
 import VF.Feilds.RoverRuckusField;
-import VF.Feilds.TestField;
-import VF.Objects.Robot;
-import VF.PointField;
-import VF.VectorShapes.VectorRectangle;
 
 import java.awt.*;
 

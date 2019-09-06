@@ -1,8 +1,6 @@
 package VF.Objects.RoverRuckus;
 
 import Universal.Math.Pose;
-import VF.Objects.Robot;
-import VF.VectorFieldComponent;
 import VF.VectorShapes.VectorEllipse;
 
 

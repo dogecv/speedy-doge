@@ -104,30 +104,6 @@ public Path generatePath(Pose pose, double stepSize, double thresholdForDestinat
         return output;
 
     }
-    public Path generateCenterPath(Pose pose, double stepSize, double thresholdForDestination){
-        Pose leftSide = new Pose(0, 9, 0), rightSide = new Pose(0, -9, 0);
-        leftSide.rotate(pose.angle);
-        rightSide.rotate(pose.angle);
-        leftSide.add(pose);
-        rightSide.add(pose);
-        Path path1 = generatePath(leftSide, stepSize, thresholdForDestination);
-        Path path2 = generatePath(rightSide, stepSize, thresholdForDestination);
-        Path shortPath = path1, longPath = path2;
-        if(path1.getTotalPathLength() > path2.getTotalPathLength()){
-            shortPath = path2;
-            longPath = path1;
-        }
-        double length = shortPath.getTotalPathLength();
-        Path outputPath = new Path();
-        for(int i = 1; i < shortPath.getSize(); i++){
-            Vector2 v1 = longPath.pointOnPathByPercentage(i/length);
-            Vector2 v2 = new Vector2(shortPath.getCoords().get(i)[0], shortPath.getCoords().get(i)[1]);
-            v1.add(v2);
-            v1.scalarMultiply(0.5);
-            outputPath.wayPoint(v1.x, v1.y);
-        }
-        return outputPath;
-    }
 
     /*
     creates obstacles between all objects that the robot cannot pass through

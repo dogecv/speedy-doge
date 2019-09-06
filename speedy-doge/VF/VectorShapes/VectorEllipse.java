@@ -1,9 +1,7 @@
 package VF.VectorShapes;
 
 import Universal.Math.Geometry.Ellipse;
-import Universal.Math.Geometry.Rectangle;
 import Universal.Math.Pose;
-import VF.Objects.Robot;
 
 /**
  * VectorShape in the form of an Ellipse

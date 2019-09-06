@@ -3,7 +3,6 @@ package VF;
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
 import Universal.UniversalFunctions;
-import VF.Objects.Robot;
 
 /**
  * All objects that sum to create the VectorField's output vector are VectorFieldComponents

@@ -2,8 +2,6 @@ package VF.Objects.RoverRuckus;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
-import Universal.UniversalFunctions;
-import VF.Objects.Robot;
 import VF.VectorFieldComponent;
 import VF.VectorShapes.VectorRectangle;
 /**
