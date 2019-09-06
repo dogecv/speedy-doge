@@ -30,7 +30,7 @@ public class PointField extends VectorFieldComponent {
         Vector2 output = new Vector2(point.x, point.y);
         Vector2 closestRobotPoint = robot.getClosestPoint(position.toVector());
         closestRobotPoint.subtract(robot.location.toVector());
-        double strength = getStrength(output.magnitude() - closestRobotPoint.magnitude());
+        double strength = getStrength(output.magnitude() - closestRobotPoint.magnitude() - UniversalConstants.AVOIDANCE_THRESHOLD);
 
 
         //if the obstacle is in the way...
@@ -49,9 +49,7 @@ public class PointField extends VectorFieldComponent {
         else {
 
             //shoot straight for the destination
-            output = new Vector2(dest.magnitude() - output.x, -output.y);
-            output.setFromPolar(strength, output.angle());
-            output.rotate(dest.angle());
+            output = new Vector2();
         }
         return output;
     }

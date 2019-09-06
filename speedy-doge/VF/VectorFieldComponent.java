@@ -2,6 +2,7 @@ package VF;
 
 import Universal.Math.Pose;
 import Universal.Math.Vector2;
+import Universal.UniversalFunctions;
 import VF.Objects.Robot;
 
 /**
@@ -29,6 +30,7 @@ public abstract class VectorFieldComponent implements ActivatableComponent {
     returns the magnitude of a vector whose origin is a distance d away from the field's origin
     */
     public double getStrength (double d) {
+        d = UniversalFunctions.clamp(0, d, d+1);
         return strength / d * Math.pow(Math.E, falloff * (strength - d));
     }
     /*

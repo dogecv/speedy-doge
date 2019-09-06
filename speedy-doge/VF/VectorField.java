@@ -78,6 +78,7 @@ public class VectorField {
             System.out.println(pose.toVector());
             output.wayPoint(pose.x, pose.y);
             st+= pose.toVector().toString() + ", ";
+            pose.angle = temp2.angle();
 
             temp = new Vector2(destination.location.x, destination.location.y);
         }

@@ -92,7 +92,7 @@ public class Waypoint {
             output.setFromPolar(-1, output.angle());
 
             //TODO:
-            return new Vector2();
+            return output;
         }
       
         public double getStrength(double d){

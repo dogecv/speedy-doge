@@ -22,4 +22,6 @@ public class UniversalConstants {
 
     //TODO: turn this into a function, not a constant
     public static double MINIMUM_APPROACH_DISTANCE = 20;
+
+    public static double AVOIDANCE_THRESHOLD = 3;
 }

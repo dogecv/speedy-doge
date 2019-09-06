@@ -28,23 +28,9 @@ public class Lander extends VectorFieldComponent {
 
     public Vector2 interact(Pose pose){
         Vector2 bodyVect = landerBody.interact(pose);
-        Vector2 leg1Vect = landerLeg1.interact(pose);
-        Vector2 leg2Vect = landerLeg2.interact(pose);
-
-        if(bodyVect.magnitude() >= Math.max(leg1Vect.magnitude(), leg2Vect.magnitude())){
-            System.out.println("body");
-            return bodyVect;
-        }
-        else if(leg1Vect.magnitude() >= Math.max(leg2Vect.magnitude(), bodyVect.magnitude())){
-            System.out.println("leg1");
-            return leg1Vect;
-        }
-        else if(leg2Vect.magnitude() >= Math.max(leg1Vect.magnitude(), bodyVect.magnitude())) {
-            System.out.println("leg2");
-            return leg2Vect;
-        }
-        System.out.println("rip");
-        return leg1Vect;
+        bodyVect.add(landerLeg1.interact(pose));
+        bodyVect.add(landerLeg2.interact(pose));
+        return bodyVect;
     }
 
 
