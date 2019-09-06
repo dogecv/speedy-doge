@@ -55,19 +55,39 @@ public class VectorField {
         destination.updateLocation(location);
     }
 
+//TODO: calculate boundary conditions after the center path is generated or remove method
     /*
     Generates a pure pursuit path using the VectorField
 
     stepSize < thresholdForDestination
      */
-    //TODO: remove debugging methods and add comments
-    public Path generatePath(Pose pose, double stepSize, double thresholdForDestination) {
+//TODO: remove debugging methods and add comments
+public Path generatePath(Pose pose, double stepSize, double thresholdForDestination) {
+    Vector2 temp = new Vector2(destination.location.x, destination.location.y);
+    temp.subtract(pose.toVector());
+    Path output = new Path();
+    Vector2 temp2 = new Vector2();
+    int counter = 0;
+    while(temp.magnitude() > thresholdForDestination && counter < 500) {
+        counter ++;
+        temp2 = getVector(pose);
+        temp2.setFromPolar(stepSize, temp2.angle());
+        pose.x += temp2.x;
+        pose.y += temp2.y;
+        output.wayPoint(pose.x, pose.y);
+        pose.angle = temp2.angle();
+
+        temp = new Vector2(destination.location.x, destination.location.y);
+    }
+    return output;
+
+}
+    public Path printPath(Pose pose, double stepSize, double thresholdForDestination) {
         Vector2 temp = new Vector2(destination.location.x, destination.location.y);
         temp.subtract(pose.toVector());
         Path output = new Path();
         Vector2 temp2 = new Vector2();
         String st = "";
-        double min = temp.magnitude();
         int counter = 0;
         while(temp.magnitude() > thresholdForDestination && counter < 500) {
             counter ++;
@@ -75,7 +95,6 @@ public class VectorField {
             temp2.setFromPolar(stepSize, temp2.angle());
             pose.x += temp2.x;
             pose.y += temp2.y;
-            System.out.println(pose.toVector());
             output.wayPoint(pose.x, pose.y);
             st+= pose.toVector().toString() + ", ";
             pose.angle = temp2.angle();
@@ -87,7 +106,6 @@ public class VectorField {
         return output;
 
     }
-//TODO: calculate boundary conditions after the center path is generated or remove method
     public Path generateCenterPath(Pose pose, double stepSize, double thresholdForDestination){
         Pose leftSide = new Pose(0, 9, 0), rightSide = new Pose(0, -9, 0);
         leftSide.rotate(pose.angle);

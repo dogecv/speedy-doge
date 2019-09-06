@@ -20,9 +20,9 @@ public class test1 {
     public static void main (String[] args) {
 
         RoverRuckusField roverRuckusField = new RoverRuckusField();
-        roverRuckusField.setWaypoint(new Pose(60, 60));
+        roverRuckusField.setWaypoint(new Pose(15, 15));
         roverRuckusField.destination.assignArbitraryDirection();
-        roverRuckusField.generatePath(new Pose(30, -30), 1, 9);
+        roverRuckusField.generatePath(new Pose(60, 60), 1, 9);
 
 
 /*
