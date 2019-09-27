@@ -100,7 +100,6 @@ public class SkystoneField extends VectorField {
             }
         }
     }
-
     public int getSkystoneIndex(){
         for(int i = 0; i < 3; i++){
             if(blueStones.get(i).skystone)
